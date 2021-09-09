@@ -1,0 +1,51 @@
+.signInBox {
+    display:flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 15px;
+    width: 50%;
+    height: 50%;
+}
+
+.signinForm {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signInFields {
+    display: flex;
+    flex-direction: column;
+}
+
+.signInInput {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid lightgray;
+   border-radius: 4px;
+   background-color: rgba(211, 211, 211, 0.178);
+}
+
+.loginTop {
+    display: inline;
+    border-bottom:1px solid lightgray;
+}
+
+.signInInput:hover {
+    background-color: white;
+}
+
+.loginButton {
+    background-color: #ED1C40;
+    color: white;
+    font-weight: bolder;
+    border-radius: 3px;
+    width: 15%;
+    height: 5%;
+    padding: 7px;
+}
