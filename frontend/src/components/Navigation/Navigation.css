@@ -1,0 +1,51 @@
+.logo-img {
+    width: 150px;
+}
+
+.navLinks {
+    display: grid;
+    grid-template-rows: 1fr, 2fr, 1fr;
+    grid-template-areas:
+        "logo empty navlinks";
+}
+
+#navBar {
+    width: 100%;
+    position: fixed;
+    display: block;
+    margin-top: -10px;
+    height: fit-content;
+    border-bottom: 1px solid lightgray;
+    margin-left: -10px;
+    align-items: center;
+    z-index: 2;
+}
+
+.profileButtonDiv {
+    display: flex;
+    flex-direction: row-reverse;
+    align-content: center;
+}
+
+#navBarLinks {
+    display: flex;
+    height: 100%;
+    flex-direction: row-reverse;
+    align-items: center;
+    grid-area: navlinks;
+}
+
+.loginSignup {
+    text-decoration: none;
+    padding-right: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(139, 139, 139);
+}
+
+.logo {
+    width: fit-content;
+    grid-area: logo;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}

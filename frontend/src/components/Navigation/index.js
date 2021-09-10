@@ -1,36 +1,45 @@
-import './Navigation.css'
+import "./Navigation.css";
 
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import './Navigation.css';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ProfileButton from "./ProfileButton";
+import "./Navigation.css";
+import logo from "./beatupLogo.png";
 
-function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+function Navigation({ isLoaded }) {
+	const sessionUser = useSelector((state) => state.session.user);
 
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = (
-      <ProfileButton user={sessionUser} />
-    );
-  } else {
-    sessionLinks = (
-      <>
-        <NavLink to="/login">Log In</NavLink>
-        <NavLink to="/signup">Sign Up</NavLink>
-      </>
-    );
-  }
+	let sessionLinks;
+	if (sessionUser) {
+		sessionLinks = <ProfileButton user={sessionUser} />;
+	} else {
+		sessionLinks = (
+			<>
+				<div id="navBarLinks">
+					<NavLink to="/signup" className="loginSignup">Sign Up</NavLink>
+					<NavLink to="/login" className="loginSignup">Log In</NavLink>
+				</div>
+			</>
+		);
+	}
 
-  return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
-  );
+	return (
+		<div id="navBar">
+			<div className="navLinks">
+				<NavLink exact to="/" className="logo">
+					<a href="" className="logo">
+						<img
+							className="logo-img"
+							src={logo}
+							alt="beatupLogo"
+						/>
+					</a>
+				</NavLink>
+				{isLoaded && sessionLinks}
+            </div>
+		</div>
+	);
 }
 
 export default Navigation;
