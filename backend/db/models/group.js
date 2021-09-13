@@ -22,7 +22,14 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: "groupId",
 			as: "groupComments",
 		};
+        const memberColumnMapping = {
+            through: 'GroupMember',
+            otherKey:'userId',
+            foreignKey: 'groupId',
+            as: 'groupMembers'
+        };
 		Group.belongsToMany(models.User, commentColumnMapping);
+        Group.belongsToMany(models.User, memberColumnMapping);
 	};
 	return Group;
 };
