@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       groupName: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(30)
       },
       description: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING(256)
       },
       createdAt: {
         allowNull: false,
