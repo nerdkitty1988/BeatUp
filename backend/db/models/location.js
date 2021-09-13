@@ -1,11 +1,21 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Location = sequelize.define('Location', {
-    locationName: DataTypes.STRING,
+    locationName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     streetAddress: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
-    zipcode: DataTypes.INTEGER,
+    zipcode: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: [5],
+            is: /^[0-9]{5}(?:-[0-9]{4})?$/,
+        },
+    },
     locationPhotoUrl: DataTypes.STRING
   }, {});
   Location.associate = function(models) {
