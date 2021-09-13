@@ -28,7 +28,7 @@ function LoginFormPage() {
 		<div className="signInBox">
 			<div className="loginTop">
 				<h1 className="loginHead">Log in</h1>
-				<p>Not registered with us yet? Sign up</p>
+				<p>Not registered with us yet? <NavLink to='/signup' className='authLinks'>Sign Up</NavLink></p>
 			</div>
 			<div className="signinForm">
 				<form onSubmit={handleSubmit}>
@@ -50,9 +50,6 @@ function LoginFormPage() {
 						</label>
 						<label className="login-label" htmlFor="password" />
 							Password
-							<NavLink to="/forgotPassword">
-								Forgot your password?
-							</NavLink>
 							<input
 								className="signInInput"
                                 name="password"
@@ -61,6 +58,9 @@ function LoginFormPage() {
 								onChange={(e) => setPassword(e.target.value)}
 								required
 							/>
+							<NavLink to="/forgotPassword" className='authLinks'>
+								Forgot your password?
+							</NavLink>
 						<button type="submit" className="loginButton">
 							Log In
 						</button>

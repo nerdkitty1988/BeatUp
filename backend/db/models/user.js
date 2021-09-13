@@ -19,6 +19,20 @@ module.exports = (sequelize, DataTypes) => {
 					},
 				},
 			},
+            firstName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    len: [3, 50]
+                },
+            },
+            lastName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    len: [3, 75]
+                },
+            },
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,
@@ -26,6 +40,9 @@ module.exports = (sequelize, DataTypes) => {
                     len: [3, 256],
 				},
 			},
+            photoUrl: {
+                type: DataTypes.STRING,
+            },
 			hashedPassword: {
                 type: DataTypes.STRING.BINARY,
 				allowNull: false,
@@ -40,6 +57,9 @@ module.exports = (sequelize, DataTypes) => {
                     exclude: [
                         "hashedPassword",
 						"email",
+                        "firstName",
+                        "lastName",
+                        "photoUrl",
 						"createdAt",
 						"updatedAt",
 					],
@@ -47,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			scopes: {
                 currentUser: {
-                    attributes: { exclude: ["hashedPassword"] },
+                    attributes: { exclude: ["hashedPassword", "firstName", "lastName", "photoUrl"] },
 				},
 				loginUser: {
                     attributes: {},
@@ -92,6 +112,9 @@ module.exports = (sequelize, DataTypes) => {
         const user = await User.create({
             username,
             email,
+            firstName,
+            lastName,
+            photoUrl,
             hashedPassword,
         });
         return await User.scope("currentUser").findByPk(user.id);

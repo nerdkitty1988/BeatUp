@@ -1,0 +1,13 @@
+.signUpContainer {
+    display:block;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 15px;
+    width: 460px;
+    height: 413px;
+    margin-top: 150px;
+    margin-bottom: 20px;
+}
