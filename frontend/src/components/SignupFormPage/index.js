@@ -9,6 +9,10 @@ function SignupFormPage() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [zipcode, setZipcode] = useState("");
+    const [photoUrl, setPhotoUrl] = useState("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
@@ -20,7 +24,7 @@ function SignupFormPage() {
 		if (password === confirmPassword) {
 			setErrors([]);
 			return dispatch(
-				sessionActions.signup({ email, username, password })
+				sessionActions.signup({ email, username, firstName, lastName, zipcode, photoUrl, password })
 			).catch(async (res) => {
 				const data = await res.json();
 				if (data && data.errors) setErrors(data.errors);
@@ -55,6 +59,41 @@ function SignupFormPage() {
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
+					/>
+				</label>
+                <label>
+					First Name
+					<input
+						type="text"
+						value={firstName}
+						onChange={(e) => setFirstName(e.target.value)}
+						required
+					/>
+				</label>
+                <label>
+					Last Name
+					<input
+						type="text"
+						value={lastName}
+						onChange={(e) => setLastName(e.target.value)}
+						required
+					/>
+				</label>
+                <label>
+					Zip Code
+					<input
+						type="text"
+						value={zipcode}
+						onChange={(e) => setZipcode(e.target.value)}
+						required
+					/>
+				</label>
+                <label>
+					Profile Photo URL
+					<input
+						type="text"
+						value={photoUrl}
+						onChange={(e) => setPhotoUrl(e.target.value)}
 					/>
 				</label>
 				<label>
