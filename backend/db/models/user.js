@@ -1,5 +1,5 @@
 "use strict";
-const { Validator } = require("sequelize");
+const { Validator, col } = require("sequelize");
 const bcrypt = require("bcryptjs");
 
 module.exports = (sequelize, DataTypes) => {
@@ -74,10 +74,27 @@ module.exports = (sequelize, DataTypes) => {
 				},
 			},
 		}
-        );
-        User.associate = function (models) {
-            // associations can be defined here
-	};
+    );
+    User.associate = function (models) {
+        // associations can be defined here
+        const commentColumnMapping = {
+            through: 'GroupComment',
+            otherKey: 'groupId',
+            foreignKey: 'userId',
+            as: 'groupComments'
+        }
+        const memberColumnMapping = {
+            through: 'GroupMember',
+            otherKey:'groupId',
+            foreignKey: 'userId',
+            as: 'groupMembers'
+        }
+        User.belongsToMany(models.Group, commentColumnMapping)
+        User.belongsToMany(models.Group, memberColumnMapping)
+    };
+
+
+
     User.prototype.toSafeObject = function () {
         // remember, this cannot be an arrow function
         const { id, username, email } = this; // context will be the User instance
