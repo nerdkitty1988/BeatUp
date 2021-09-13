@@ -29,6 +29,10 @@ module.exports = {
             photoUrl: {
                 type: Sequelize.STRING(1000)
             },
+            zipcode: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
 			hashedPassword: {
 				type: Sequelize.STRING.BINARY,
 				allowNull: false,

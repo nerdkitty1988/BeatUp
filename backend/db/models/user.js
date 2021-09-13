@@ -42,6 +42,17 @@ module.exports = (sequelize, DataTypes) => {
 			},
             photoUrl: {
                 type: DataTypes.STRING,
+                validate: {
+                    isUrl: true,
+                },
+            },
+            zipcode: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    len: [5],
+                    is: /^[0-9]{5}(?:-[0-9]{4})?$/,
+                },
             },
 			hashedPassword: {
                 type: DataTypes.STRING.BINARY,
