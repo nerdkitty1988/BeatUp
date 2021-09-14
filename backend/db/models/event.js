@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    eventLocation: {
+    eventLocationId: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "eventId",
         as: "eventLikes",
     };
-    Event.belongsTo(models.Location, {foreignKey: 'eventLocation'});
+    Event.belongsTo(models.Location, {foreignKey: 'eventLocationId'});
     Event.belongsToMany(models.User, commentColumnMapping);
     Event.belongsToMany(models.User,participantColumnMapping);
     Event.belongsToMany(models.User, likeColumnMapping);
