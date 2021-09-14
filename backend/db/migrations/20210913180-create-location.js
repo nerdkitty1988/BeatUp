@@ -12,23 +12,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      streetAddress: {
+      locationAddress: {
         allowNull: false,
-        type: Sequelize.STRING
-      },
-      city: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      state: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      zipcode: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      locationPhotoUrl: {
         type: Sequelize.STRING
       },
       createdAt: {

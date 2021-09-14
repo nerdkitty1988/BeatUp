@@ -10,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
     },
 
-    locationPhotoUrl: DataTypes.STRING
   }, {});
   Location.associate = function(models) {
     // associations can be defined here
