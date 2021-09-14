@@ -97,8 +97,29 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'userId',
             as: 'groupMembers'
         }
-        User.belongsToMany(models.Group, commentColumnMapping)
-        User.belongsToMany(models.Group, memberColumnMapping)
+        const eventCommentColumnMapping = {
+            through: "EventComment",
+            otherKey: "eventId",
+            foreignKey: "userId",
+            as: "eventComments",
+        };
+        const participantColumnMapping = {
+            through: 'EventParticipant',
+            otherKey:'userId',
+            foreignKey: 'eventId',
+            as: 'groupParticipants'
+        };
+        const likeColumnMapping = {
+            through: "EventLikes",
+            otherKey: "userId",
+            foreignKey: "eventId",
+            as: "eventLikes",
+        };
+        User.belongsToMany(models.Group, commentColumnMapping);
+        User.belongsToMany(models.Group, memberColumnMapping);
+        User.belongsToMany(models.Event, eventCommentColumnMapping);
+        User.belongsToMany(models.Event, participantColumnMapping);
+        User.belongsToMany(models.Event, likeColumnMapping);
     };
 
 

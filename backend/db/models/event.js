@@ -30,7 +30,28 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Event.associate = function(models) {
     // associations can be defined here
-    Event.belongsTo(models.Location, {foreignKey: 'eventLocation'})
+    const commentColumnMapping = {
+        through: "EventComment",
+        otherKey: "userId",
+        foreignKey: "eventId",
+        as: "eventComments",
+    };
+    const participantColumnMapping = {
+        through: 'EventParticipant',
+        otherKey:'userId',
+        foreignKey: 'eventId',
+        as: 'groupParticipants'
+    };
+    const likeColumnMapping = {
+        through: "EventLikes",
+        otherKey: "userId",
+        foreignKey: "eventId",
+        as: "eventLikes",
+    };
+    Event.belongsTo(models.Location, {foreignKey: 'eventLocation'});
+    Event.belongsToMany(models.User, commentColumnMapping);
+    Event.belongsToMany(models.User,participantColumnMapping);
+    Event.belongsToMany(models.User, likeColumnMapping);
   };
   return Event;
 };
