@@ -11,11 +11,6 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			rsvpStatus: {
-				type: DataTypes.STRING,
-				allowNull: false,
-				defaultValue: "Not Attending",
-			},
 		},
 		{}
 	);

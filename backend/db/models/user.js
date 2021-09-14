@@ -115,11 +115,18 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "eventId",
             as: "eventLikes",
         };
+        const rsvpColumnMapping = {
+            through: 'Rsvp',
+            otherKey:'userId',
+            foreignKey: 'eventId',
+            as: 'rsvpStatus'
+        };
         User.belongsToMany(models.Group, commentColumnMapping);
         User.belongsToMany(models.Group, memberColumnMapping);
         User.belongsToMany(models.Event, eventCommentColumnMapping);
         User.belongsToMany(models.Event, participantColumnMapping);
         User.belongsToMany(models.Event, likeColumnMapping);
+        User.belongsToMany(models.Event, rsvpColumnMapping);
     };
 
 
