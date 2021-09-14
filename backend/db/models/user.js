@@ -42,6 +42,17 @@ module.exports = (sequelize, DataTypes) => {
 			},
             photoUrl: {
                 type: DataTypes.STRING,
+                validate: {
+                    isUrl: true,
+                },
+            },
+            zipcode: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    len: [5],
+                    is: /^[0-9]{5}(?:-[0-9]{4})?$/,
+                },
             },
 			hashedPassword: {
                 type: DataTypes.STRING.BINARY,
@@ -57,9 +68,6 @@ module.exports = (sequelize, DataTypes) => {
                     exclude: [
                         "hashedPassword",
 						"email",
-                        "firstName",
-                        "lastName",
-                        "photoUrl",
 						"createdAt",
 						"updatedAt",
 					],
@@ -67,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			scopes: {
                 currentUser: {
-                    attributes: { exclude: ["hashedPassword", "firstName", "lastName", "photoUrl"] },
+                    attributes: { exclude: ["hashedPassword"] },
 				},
 				loginUser: {
                     attributes: {},
@@ -89,16 +97,37 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'userId',
             as: 'groupMembers'
         }
-        User.belongsToMany(models.Group, commentColumnMapping)
-        User.belongsToMany(models.Group, memberColumnMapping)
+        const eventCommentColumnMapping = {
+            through: "EventComment",
+            otherKey: "eventId",
+            foreignKey: "userId",
+            as: "eventComments",
+        };
+        const participantColumnMapping = {
+            through: 'EventParticipant',
+            otherKey:'userId',
+            foreignKey: 'eventId',
+            as: 'groupParticipants'
+        };
+        const likeColumnMapping = {
+            through: "EventLikes",
+            otherKey: "userId",
+            foreignKey: "eventId",
+            as: "eventLikes",
+        };
+        User.belongsToMany(models.Group, commentColumnMapping);
+        User.belongsToMany(models.Group, memberColumnMapping);
+        User.belongsToMany(models.Event, eventCommentColumnMapping);
+        User.belongsToMany(models.Event, participantColumnMapping);
+        User.belongsToMany(models.Event, likeColumnMapping);
     };
 
 
 
     User.prototype.toSafeObject = function () {
         // remember, this cannot be an arrow function
-        const { id, username, email } = this; // context will be the User instance
-        return { id, username, email };
+        const { id, username, email, firstName, lastName, zipcode, photoUrl } = this; // context will be the User instance
+        return { id, username, email, firstName, lastName, zipcode, photoUrl };
     };
 
     User.prototype.validatePassword = function (password) {
@@ -124,13 +153,14 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
 
-    User.signup = async function ({ username, email, password }) {
+    User.signup = async function ({ username, email, firstName, lastName, zipcode, photoUrl, password }) {
         const hashedPassword = bcrypt.hashSync(password);
         const user = await User.create({
             username,
             email,
             firstName,
             lastName,
+            zipcode,
             photoUrl,
             hashedPassword,
         });
