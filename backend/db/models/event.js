@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    eventDescription: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     eventPhotoUrl: {
         type: DataTypes.STRING,
     },

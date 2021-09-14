@@ -5,10 +5,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    locationAddress: {
+    locationStreet: {
         allowNull: false,
         type: DataTypes.STRING,
     },
+    locationCity: {
+        allowNull: false,
+        type: DataTypes.STRING,
+    },
+    locationState: {
+        allowNull: false,
+        type: DataTypes.STRING,
+    },
+    locationZip: {
+        allowNull: false,
+        type: DataTypes.STRING,
+    }
 
   }, {});
   Location.associate = function(models) {
