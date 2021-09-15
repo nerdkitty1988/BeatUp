@@ -57,7 +57,9 @@ const EventPage = () => {
 										<p>{event.eventLocationId}</p>
 										<p>{event.eventDate}</p>
 										<p>{event.eventTime}</p>
-                                        {/* <p>{rsvps[event.id - 1].rsvpStatus ? "Not Attending"}</p> */}
+                                        {rsvps.map((rsvp) => {
+                                            if(rsvp.userId === sessionUser.id && rsvp.eventId === event.id) return <p>{rsvp.rsvpStatus}</p>
+                                        })}
 									</div>
 								</div>
 							</div>

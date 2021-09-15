@@ -52,9 +52,7 @@ export const getRsvps = () => async (dispatch) => {
 
     if (res.ok) {
         const list = await res.json();
-        console.log(list)
         dispatch(load(list));
-        return list;
     }
 };
 
@@ -66,10 +64,12 @@ const rsvpReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD: {
             const newRsvpList = { ...state.rsvpList };
+            let i = 0;
             action.list.forEach((rsvp) => {
-				newRsvpList[rsvp.id] = rsvp;
+				newRsvpList[i] = rsvp;
+                i++;
 			});
-            return {...state, rsvpList: newRsvpList};
+            return {...state, rsvpList: { ...newRsvpList }};
         }
         case ADD_ONE: {
             if (!state[action.rsvp.id]) {

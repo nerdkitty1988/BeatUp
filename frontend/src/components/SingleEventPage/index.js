@@ -7,7 +7,7 @@ import { getEvents } from "../../store/event";
 import { getRsvps } from "../../store/rsvp";
 
 const SingleEventPage = () => {
-    const sessionUser = useSelector((state) => state.session.user);
+	const sessionUser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const { eventId } = useParams();
 
@@ -15,29 +15,34 @@ const SingleEventPage = () => {
 		return Object.values(state.eventState.eventList)[eventId - 1];
 	});
 	const rsvps = useSelector((state) => {
-		return Object.values(state.rsvpState.rsvpList).filter((rsvp) => {
-            return (rsvp.userId === sessionUser.id)
-        });
+		return Object.values(state.rsvpState.rsvpList);
 	});
 
 	useEffect(() => {
 		dispatch(getEvents());
 	}, [dispatch]);
 
-    useEffect(() => {
-        dispatch(getRsvps());
-    }, [dispatch])
+	useEffect(() => {
+		dispatch(getRsvps());
+	}, [dispatch]);
 
 	if (!event) return null;
 
 	return (
 		<div className="singleEventCont">
 			<div className="eventCont">
-                <img id="eventImg" alt="event" src={event.eventPhotoUrl} />
+				<img id="eventImg" alt="event" src={event.eventPhotoUrl} />
 				<h1>{event.eventName}</h1>
 				<p>{event.eventLocationId}</p>
 				<p>{event.eventDate}</p>
 				<p>{event.eventTime}</p>
+				{rsvps.map((rsvp) => {
+					if (
+						rsvp.userId === sessionUser.id &&
+						rsvp.eventId === event.id
+					)
+						return <p>{rsvp.rsvpStatus}</p>;
+				})}
 			</div>
 		</div>
 	);
