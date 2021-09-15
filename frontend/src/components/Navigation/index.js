@@ -15,8 +15,12 @@ function Navigation({ isLoaded }) {
 		sessionLinks = (
 			<>
 				<div id="navBarLinks">
-					<NavLink to="/signup" className="loginSignup">Sign Up</NavLink>
-					<NavLink to="/login" className="loginSignup">Log In</NavLink>
+					<NavLink to="/signup" className="loginSignup">
+						Sign Up
+					</NavLink>
+					<NavLink to="/login" className="loginSignup">
+						Log In
+					</NavLink>
 				</div>
 			</>
 		);
@@ -26,16 +30,10 @@ function Navigation({ isLoaded }) {
 		<div id="navBar">
 			<div className="navLinks">
 				<NavLink exact to="/" className="logo">
-					<a href="/" className="logo">
-						<img
-							className="logo-img"
-							src={logo}
-							alt="beatupLogo"
-						/>
-					</a>
+					<img className="logo-img" src={logo} alt="beatupLogo" />
 				</NavLink>
 				{isLoaded && sessionLinks}
-            </div>
+			</div>
 		</div>
 	);
 }

@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import "./SingleEventPage.css";
 
 import { getEvents } from "../../store/event";
+import { getRsvps } from "../../store/rsvp";
 
 const SingleEventPage = () => {
+    const sessionUser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const { eventId } = useParams();
 
@@ -13,12 +15,18 @@ const SingleEventPage = () => {
 		return Object.values(state.eventState.eventList)[eventId - 1];
 	});
 	const rsvps = useSelector((state) => {
-		return Object.values(state.eventState.rsvpStatus);
+		return Object.values(state.rsvpState.rsvpList).filter((rsvp) => {
+            return (rsvp.userId === sessionUser.id)
+        });
 	});
 
 	useEffect(() => {
 		dispatch(getEvents());
 	}, [dispatch]);
+
+    useEffect(() => {
+        dispatch(getRsvps());
+    }, [dispatch])
 
 	if (!event) return null;
 
@@ -30,7 +38,6 @@ const SingleEventPage = () => {
 				<p>{event.eventLocationId}</p>
 				<p>{event.eventDate}</p>
 				<p>{event.eventTime}</p>
-				<p>{rsvps[event.id - 1].rsvpStatus}</p>
 			</div>
 		</div>
 	);

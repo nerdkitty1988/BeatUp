@@ -4,20 +4,35 @@ import { NavLink } from "react-router-dom";
 import "./EventPage.css";
 
 import { getEvents } from "../../store/event";
+import { getLocations } from "../../store/location";
+import { getRsvps } from "../../store/rsvp";
 
 const EventPage = () => {
+    const sessionUser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 
 	const events = useSelector((state) => {
 		return Object.values(state.eventState.eventList);
 	});
 	const rsvps = useSelector((state) => {
-		return Object.values(state.eventState.rsvpStatus);
+		return Object.values(state.rsvpState.rsvpList);
+
 	});
+    // const locations = useSelector((state) => {
+    //     return Object.values(state.)
+    // })
+
+    useEffect(() => {
+        dispatch(getLocations())
+    }, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getEvents());
 	}, [dispatch]);
+
+    useEffect(() => {
+        dispatch(getRsvps());
+    }, [dispatch])
 
 	if (!events) return null;
 
@@ -42,7 +57,7 @@ const EventPage = () => {
 										<p>{event.eventLocationId}</p>
 										<p>{event.eventDate}</p>
 										<p>{event.eventTime}</p>
-                                        <p>{rsvps[event.id - 1].rsvpStatus}</p>
+                                        {/* <p>{rsvps[event.id - 1].rsvpStatus ? "Not Attending"}</p> */}
 									</div>
 								</div>
 							</div>

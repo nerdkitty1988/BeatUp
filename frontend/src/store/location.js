@@ -86,6 +86,8 @@ const locationReducer = (state = initialState, action) => {
                         },
             };
         };
+        default:
+            return state;
     }
 }
 

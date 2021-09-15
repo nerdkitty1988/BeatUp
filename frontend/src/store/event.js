@@ -53,35 +53,23 @@ export const getEvents = () => async (dispatch) => {
 
 	if (res.ok) {
         const list = await res.json();
-		console.log(list);
 		dispatch(load(list));
 	}
 };
 
-// export const getSingleEvent = (eventId) => async (dispatch) => {
-//     const res = await fetch(`/api/events/${eventId}`);
-//     const singleEvent = await res.json();
-//     dispatch(load(singleEvent));
-//     return singleEvent;
-// }
-
 const initialState = {
     eventList: {},
-    rsvpStatus: {}
 };
 
 const eventReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD: {
             const newEventList = { ...state.eventList };
-			action.list[0].forEach((event) => {
+			action.list.forEach((event) => {
                 newEventList[event.id] = event;
 			});
-            const newRsvpList = { ...state.rsvpStatus };
-            action.list[1].forEach((rsvp) => {
-				newRsvpList[rsvp.eventId] = rsvp;
-			});
-			return { ...state, eventList: { ...newEventList }, rsvpStatus: {...newRsvpList } };
+
+			return { ...state, eventList: { ...newEventList } };
 		}
 		case ADD_ONE: {
 			if (!state[action.event.id]) {
