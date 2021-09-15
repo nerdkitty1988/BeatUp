@@ -17,6 +17,8 @@ function HomePage() {
                 <div>
                     <h1>Wanna rumble?</h1>
                     <NavLink to="/signup">Sign up</NavLink>
+                    <h2>Already a Fighter?</h2>
+                    <NavLink to="/login">Sign in</NavLink>
                 </div>
             </div>
         )

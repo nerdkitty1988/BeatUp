@@ -72,7 +72,7 @@ const eventReducer = (state = initialState, action) => {
 			});
             const newRsvpList = { ...state.rsvpStatus };
             action.list[1].forEach((rsvp) => {
-				newRsvpList[rsvp.id] = rsvp;
+				newRsvpList[rsvp.eventId] = rsvp;
 			});
 			return { ...state, eventList: { ...newEventList }, rsvpStatus: {...newRsvpList } };
 		}
