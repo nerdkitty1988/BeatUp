@@ -30,11 +30,11 @@ function App() {
 					<Route path="/signup">
 						<SignupFormPage />
 					</Route>
-                    <Route path="/events">
-                        <EventPage />
-                    </Route>
                     <Route path="/events/:eventId">
                         <SingleEventPage />
+                    </Route>
+                    <Route path="/events">
+                        <EventPage />
                     </Route>
 				</Switch>
 			)}
