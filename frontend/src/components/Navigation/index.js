@@ -26,7 +26,7 @@ function Navigation({ isLoaded }) {
 		<div id="navBar">
 			<div className="navLinks">
 				<NavLink exact to="/" className="logo">
-					<a href="" className="logo">
+					<a href="/" className="logo">
 						<img
 							className="logo-img"
 							src={logo}

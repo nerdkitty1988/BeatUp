@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import React from "react";
 import { NavLink } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import "./HomePage.css";
 
 function HomePage() {
-    const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
 
     if(!sessionUser) {
@@ -17,6 +14,8 @@ function HomePage() {
                 <div>
                     <h1>Wanna rumble?</h1>
                     <NavLink to="/signup">Sign up</NavLink>
+                    <h2>Already a Fighter?</h2>
+                    <NavLink to="/login">Sign in</NavLink>
                 </div>
             </div>
         )
