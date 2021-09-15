@@ -10,10 +10,15 @@ const EventPage = () => {
     const { eventId } = useParams();
     const sessionUser = useSelector((state) => state.session.user);
 
-    
+
     const events = useSelector((state) => {
         return Object.values(state.eventState.eventList);
     });
+    const rsvps = useSelector((state) => {
+        return Object.values(state.eventState.rsvpStatus);
+    });
+
+
 
     useEffect(() => {
         dispatch(getEvents())
