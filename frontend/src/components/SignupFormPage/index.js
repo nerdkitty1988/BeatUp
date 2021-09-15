@@ -47,6 +47,7 @@ function SignupFormPage() {
 					Email
 					<input
 						type="text"
+                        className="signupInput"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
@@ -56,6 +57,7 @@ function SignupFormPage() {
 					Username
 					<input
 						type="text"
+                        className="signupInput"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
@@ -65,6 +67,7 @@ function SignupFormPage() {
 					First Name
 					<input
 						type="text"
+                        className="signupInput"
 						value={firstName}
 						onChange={(e) => setFirstName(e.target.value)}
 						required
@@ -74,6 +77,7 @@ function SignupFormPage() {
 					Last Name
 					<input
 						type="text"
+                        className="signupInput"
 						value={lastName}
 						onChange={(e) => setLastName(e.target.value)}
 						required
@@ -83,6 +87,7 @@ function SignupFormPage() {
 					Zip Code
 					<input
 						type="text"
+                        className="signupInput"
 						value={zipcode}
 						onChange={(e) => setZipcode(e.target.value)}
 						required
@@ -92,6 +97,7 @@ function SignupFormPage() {
 					Profile Photo URL
 					<input
 						type="text"
+                        className="signupInput"
 						value={photoUrl}
 						onChange={(e) => setPhotoUrl(e.target.value)}
 					/>
@@ -100,6 +106,7 @@ function SignupFormPage() {
 					Password
 					<input
 						type="password"
+                        className="signupInput"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						required
@@ -109,6 +116,7 @@ function SignupFormPage() {
 					Confirm Password
 					<input
 						type="password"
+                        className="signupInput"
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
 						required
