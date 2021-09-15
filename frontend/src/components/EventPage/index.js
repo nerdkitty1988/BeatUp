@@ -1,14 +1,12 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Route, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./EventPage.css";
 
-import { getEvents, updateEvent, createEvent } from "../../store/event";
+import { getEvents } from "../../store/event";
 
 const EventPage = () => {
 	const dispatch = useDispatch();
-	const { eventId } = useParams();
-	const sessionUser = useSelector((state) => state.session.user);
 
 	const events = useSelector((state) => {
 		return Object.values(state.eventState.eventList);
@@ -16,7 +14,6 @@ const EventPage = () => {
 	const rsvps = useSelector((state) => {
 		return Object.values(state.eventState.rsvpStatus);
 	});
-    console.log(rsvps);
 
 	useEffect(() => {
 		dispatch(getEvents());
@@ -37,7 +34,7 @@ const EventPage = () => {
 								<img
 									id="eventPhoto"
 									src={event.eventPhotoUrl}
-									alt="event photo"
+									alt="event"
 								/>
 								<div className="eventInfo">
 									<h2>{event.eventName}</h2>

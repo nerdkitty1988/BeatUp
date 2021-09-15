@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import EventPage from "./components/EventPage"
 import HomePage from "./components/HomePage";
+import SingleEventPage from "./components/SingleEventPage";
 
 function App() {
 	const dispatch = useDispatch();
@@ -31,6 +32,9 @@ function App() {
 					</Route>
                     <Route path="/events">
                         <EventPage />
+                    </Route>
+                    <Route path="/events/:eventId">
+                        <SingleEventPage />
                     </Route>
 				</Switch>
 			)}

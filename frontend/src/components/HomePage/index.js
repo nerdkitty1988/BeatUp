@@ -1,13 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import React from "react";
 import { NavLink } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import "./HomePage.css";
 
 function HomePage() {
-    const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
 
     if(!sessionUser) {

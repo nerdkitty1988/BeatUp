@@ -58,6 +58,13 @@ export const getEvents = () => async (dispatch) => {
 	}
 };
 
+export const getSingleEvent = (eventId) => async (dispatch) => {
+    const res = await fetch(`/api/events/${eventId}`);
+    const singleEvent = await res.json();
+    dispatch(load(singleEvent));
+    return singleEvent;
+}
+
 const initialState = {
     eventList: {},
     rsvpStatus: {}
