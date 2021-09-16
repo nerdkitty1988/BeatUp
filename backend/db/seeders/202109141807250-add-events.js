@@ -12,7 +12,7 @@ module.exports = {
 			"Events",
 			[
 				{
-					eventName: "Gradutaion Party",
+					eventName: "Gradutation Party",
 					eventLocationId: 1,
 					eventDate: new Date(),
 					eventTime: "07:00 pm",

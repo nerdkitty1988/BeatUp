@@ -19,11 +19,11 @@ module.exports = {
 					locationZip: "20500",
 				},
 				{
-					locationName: "The White House",
-					locationStreet: "1600 Pennsylvania Avenue NW",
-					locationCity: "Washington",
-					locationState: "DC",
-					locationZip: "20500",
+					locationName: "THE ARENA",
+					locationStreet: "3350 Sports Arena Blvd",
+					locationCity: "San Diego",
+					locationState: "CA",
+					locationZip: "92110",
 				},
 				{
 					locationName: "Madison Square Garden",
