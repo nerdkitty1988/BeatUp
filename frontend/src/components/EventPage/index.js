@@ -20,7 +20,7 @@ const EventPage = () => {
 	const locations = useSelector((state) => {
 		return Object.values(state.locationState.locationList);
 	});
-	console.log(locations);
+
 
 	useEffect(() => {
 		dispatch(getLocations());
