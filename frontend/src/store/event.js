@@ -35,7 +35,7 @@ export const createEvent = (newEvent) => async (dispatch) => {
 };
 
 export const updateEvent = (newEvent) => async (dispatch) => {
-	const res = await csrfFetch(`/api/events`, {
+	const res = await csrfFetch(`/api/events/${newEvent.id}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -45,8 +45,8 @@ export const updateEvent = (newEvent) => async (dispatch) => {
 	const event = await res.json();
 	if (res.ok) {
 		dispatch(addOneEvent(event));
-		return event;
 	}
+    return event;
 };
 
 export const getEvents = () => async (dispatch) => {
@@ -84,9 +84,10 @@ const eventReducer = (state = initialState, action) => {
 			};
 		};
 		case REMOVE_EVENT: {
+            const list = Object.values(state.eventList);
 			return {
 				...state,
-				eventList: state[action.eventId].list.filter(
+				eventList: list.filter(
 					(event) => event.id !== action.eventId
 				),
 			};

@@ -36,6 +36,7 @@ router.put(
 			groupId,
 		} = req.body;
         const details = {
+            id,
 			eventName,
 			eventLocationId,
 			eventDate,
@@ -49,8 +50,7 @@ router.put(
             details,
             {
                 where: {id},
-                returning: true,
-                plain: true,
+
             }
 		);
 
