@@ -21,10 +21,11 @@ router.get(
 	})
 );
 
-router.post(
+router.put(
 	"/:eventId",
 	asyncHandler(async (req, res) => {
 		const {
+            id,
 			eventName,
 			eventLocationId,
 			eventDate,
@@ -34,16 +35,24 @@ router.post(
 			eventOwnerId,
 			groupId,
 		} = req.body;
-		const event = await Event.updateEvent({
-            eventName,
-            eventLocationId,
-            eventDate,
-            eventTime,
-            eventDescription,
-            eventPhotoUrl,
-            eventOwnerId,
-            groupId,
-		});
+        const details = {
+			eventName,
+			eventLocationId,
+			eventDate,
+			eventTime,
+			eventDescription,
+			eventPhotoUrl,
+			eventOwnerId,
+			groupId}
+		const event = await Event.update(
+
+            details,
+            {
+                where: {id},
+                returning: true,
+                plain: true,
+            }
+		);
 
 		return res.json({
 			event,

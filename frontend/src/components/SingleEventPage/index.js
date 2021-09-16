@@ -8,34 +8,34 @@ import { getRsvps } from "../../store/rsvp";
 import { getLocations } from "../../store/location";
 
 const SingleEventPage = () => {
-	const sessionUser = useSelector((state) => state.session.user);
+    const sessionUser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const { eventId } = useParams();
 
-    const [eventName, setEventName] = useState("");
-	const [eventLocationId, setEventLocationId] = useState("");
-	const [eventDate, setEventDate] = useState("");
+	const [eventName, setEventName] = useState("");
+	const [eventLocationId, setEventLocationId] = useState();
+	const [eventDate, setEventDate] = useState();
 	const [eventTime, setEventTime] = useState("");
 	const [eventDescription, setEventDescription] = useState("");
 	const [eventPhotoUrl, setEventPhotoUrl] = useState("");
-	const [eventOwnerId, setEventOwnerId] = useState("");
-	const [groupId, setGroupId] = useState("");
+	const [eventOwnerId, setEventOwnerId] = useState();
+	const [groupId, setGroupId] = useState();
 	const [errors, setErrors] = useState([]);
-    const [showEdit, setShowEdit] = useState(true);
+	const [showEdit, setShowEdit] = useState(true);
 
-	const event = useSelector((state) => {
-		return Object.values(state.eventState.eventList)[eventId - 1];
-	});
+    const event = useSelector((state) => {
+        return Object.values(state.eventState.eventList)[eventId - 1];
+    });
 	const rsvps = useSelector((state) => {
-		return Object.values(state.rsvpState.rsvpList);
+        return Object.values(state.rsvpState.rsvpList);
 	});
 	const locations = useSelector((state) => {
-		return Object.values(state.locationState.locationList);
+        return Object.values(state.locationState.locationList);
 	});
 
-	useEffect(() => {
-		dispatch(eventActions.getEvents());
-	}, [dispatch]);
+    useEffect(() => {
+        dispatch(eventActions.getEvents());
+    }, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getRsvps());
@@ -47,24 +47,28 @@ const SingleEventPage = () => {
 
 	if (!event) return null;
 
-    const handleSubmit = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 		setErrors([]);
-		return dispatch(
-			eventActions.updateEvent({
-				eventName,
-				eventLocationId,
-				eventDate,
-				eventTime,
-				eventDescription,
-				eventPhotoUrl,
-				eventOwnerId,
-				groupId,
-			})
-		).catch(async (res) => {
-			const data = await res.json();
-			if (data && data.errors) setErrors(data.errors);
-		});
+		const payload = {
+            ...event,
+			eventName,
+			eventLocationId,
+			eventDate,
+			eventTime,
+			eventDescription,
+			eventPhotoUrl,
+			eventOwnerId,
+			groupId,
+		};
+		let updatedEvent = dispatch(eventActions.updateEvent(payload));
+		if (updatedEvent) {
+            setShowEdit(true)
+        }else{
+            setShowEdit(false);
+        }
+
+
 	};
 
 	return (
@@ -81,7 +85,7 @@ const SingleEventPage = () => {
 						<input
 							type="text"
 							className="editEventInput"
-							placeholder={event.eventName}
+							defaultValue={event.eventName}
 							value={eventName}
 							onChange={(e) => setEventName(e.target.value)}
 						/>
@@ -90,13 +94,13 @@ const SingleEventPage = () => {
 						Location
 						<select
 							id="locations"
-							placeholder={locations[event.eventLocationId]}
+							defaultValue={locations[event.eventLocationId]}
 							onChange={(e) =>
-								setEventLocationId(e.target.value.id)
+								setEventLocationId(e.target.value)
 							}
 						>
 							{locations.map((location, idx) => (
-								<option value={location[idx]}>
+								<option key={idx} value={location.id}>
 									{location.locationName}
 								</option>
 							))}
@@ -108,9 +112,9 @@ const SingleEventPage = () => {
 						<input
 							type="date"
 							className="editEventInput"
-							placeholder={event.eventDate}
+							defaultValue={event.eventDate}
 							value={eventDate}
-							onChange={(e) => setEventDate(e.target.value)}
+							onSelect={(e) => setEventDate(e.target.value)}
 						/>
 					</label>
 					<label>
@@ -142,8 +146,9 @@ const SingleEventPage = () => {
 							type="url"
 							className="editEventInput"
 							value={eventPhotoUrl}
+                            defaultValue={event.eventPhotoUrl}
 							placeholder={event.eventPhotoUrl}
-							onChange={(e) => setEventPhotoUrl(e.target.value)}
+							onSubmit={(e) => setEventPhotoUrl(e.target.value)}
 						/>
 					</label>
 					{/* if {groups}
@@ -165,7 +170,11 @@ const SingleEventPage = () => {
 			<div className="singleEventCont">
 				<div className="eventCont">
 					<div id="editEventNav">
-						<button onClick={() => setShowEdit(true ? false : true)}>Edit Event</button>
+						<button
+							onClick={() => setShowEdit(true ? false : true)}
+						>
+							Edit Event
+						</button>
 					</div>
 					<img
 						id="eventPhoto"
@@ -197,7 +206,7 @@ const SingleEventPage = () => {
 							rsvp.userId === sessionUser.id &&
 							rsvp.eventId === event.id
 						)
-							return <p>{rsvp.rsvpStatus}</p>;
+							return <p key={rsvp.rsvpStatus}>{rsvp.rsvpStatus}</p>;
 					})}
 				</div>
 			</div>
