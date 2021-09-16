@@ -38,6 +38,9 @@ const EventPage = () => {
 
 	return (
 		<div className="eventListCont">
+            <div id="addEventNav">
+                <NavLink id="addEvent" to={`events/add`}>Add New Event</NavLink>
+            </div>
 			<nav>
 				{events.map((event) => {
 					return (
@@ -48,7 +51,9 @@ const EventPage = () => {
 							<div className="eventContainer">
 								<img
 									id="eventPhoto"
-									src={event.eventPhotoUrl}
+									src={
+                                        event.eventPhotoUrl ? event.eventPhotoUrl : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommonlook.com%2Ftribe-related-events-placeholder%2F&psig=AOvVaw2KIYVmzCCF1e8p8Hyfj_Px&ust=1631898035505000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKjD04_8g_MCFQAAAAAdAAAAABAE"
+                                    }
 									alt="event"
 								/>
 								<div className="eventInfo">
