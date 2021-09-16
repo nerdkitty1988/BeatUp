@@ -5,6 +5,7 @@ import "./SingleEventPage.css";
 
 import { getEvents } from "../../store/event";
 import { getRsvps } from "../../store/rsvp";
+import { getLocations } from "../../store/location";
 
 const SingleEventPage = () => {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -17,6 +18,9 @@ const SingleEventPage = () => {
 	const rsvps = useSelector((state) => {
 		return Object.values(state.rsvpState.rsvpList);
 	});
+    const locations = useSelector((state) => {
+		return Object.values(state.locationState.locationList);
+	});
 
 	useEffect(() => {
 		dispatch(getEvents());
@@ -26,6 +30,10 @@ const SingleEventPage = () => {
 		dispatch(getRsvps());
 	}, [dispatch]);
 
+    useEffect(() => {
+		dispatch(getLocations());
+	}, [dispatch]);
+
 	if (!event) return null;
 
 	return (
@@ -33,7 +41,19 @@ const SingleEventPage = () => {
 			<div className="eventCont">
 				<img id="eventImg" alt="event" src={event.eventPhotoUrl} />
 				<h1>{event.eventName}</h1>
-				<p>{event.eventLocationId}</p>
+				{locations.map((location) => {
+					if (event.eventLocationId === location.id)
+						return (
+							<p>
+								{location.locationName},{" "}
+								{location.locationStreet},{" "}
+								{location.locationCity},{" "}
+								{location.locationState}, {location.locationZip}
+							</p>
+						);
+				})}
+                <button>New Location</button>
+                <p>{event.eventDescription}</p>
 				<p>{event.eventDate}</p>
 				<p>{event.eventTime}</p>
 				{rsvps.map((rsvp) => {

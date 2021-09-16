@@ -96,7 +96,7 @@ function SignupFormPage() {
                 <label>
 					Profile Photo URL
 					<input
-						type="text"
+						type="url"
                         className="signupInput"
 						value={photoUrl}
 						onChange={(e) => setPhotoUrl(e.target.value)}

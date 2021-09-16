@@ -21,4 +21,34 @@ router.get(
 	})
 );
 
+router.post(
+	"/:eventId",
+	asyncHandler(async (req, res) => {
+		const {
+			eventName,
+			eventLocationId,
+			eventDate,
+			eventTime,
+			eventDescription,
+			eventPhotoUrl,
+			eventOwnerId,
+			groupId,
+		} = req.body;
+		const event = await Event.updateEvent({
+            eventName,
+            eventLocationId,
+            eventDate,
+            eventTime,
+            eventDescription,
+            eventPhotoUrl,
+            eventOwnerId,
+            groupId,
+		});
+
+		return res.json({
+			event,
+		});
+	})
+);
+
 module.exports = router;

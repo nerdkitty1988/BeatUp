@@ -8,7 +8,7 @@ import { getLocations } from "../../store/location";
 import { getRsvps } from "../../store/rsvp";
 
 const EventPage = () => {
-    const sessionUser = useSelector((state) => state.session.user);
+	const sessionUser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 
 	const events = useSelector((state) => {
@@ -16,23 +16,23 @@ const EventPage = () => {
 	});
 	const rsvps = useSelector((state) => {
 		return Object.values(state.rsvpState.rsvpList);
-
 	});
-    // const locations = useSelector((state) => {
-    //     return Object.values(state.)
-    // })
+	const locations = useSelector((state) => {
+		return Object.values(state.locationState.locationList);
+	});
 
-    useEffect(() => {
-        dispatch(getLocations())
-    }, [dispatch]);
+
+	useEffect(() => {
+		dispatch(getLocations());
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getEvents());
 	}, [dispatch]);
 
-    useEffect(() => {
-        dispatch(getRsvps());
-    }, [dispatch])
+	useEffect(() => {
+		dispatch(getRsvps());
+	}, [dispatch]);
 
 	if (!events) return null;
 
@@ -54,12 +54,25 @@ const EventPage = () => {
 								<div className="eventInfo">
 									<h2>{event.eventName}</h2>
 									<div>
-										<p>{event.eventLocationId}</p>
+										{locations.map((location) => {
+											if (
+												event.eventLocationId === location.id
+											)
+												return (
+                                                    <p>{location.locationName}, {location.locationStreet}, {location.locationCity}, {location.locationState}, {location.locationZip}</p>
+
+                                                )
+										})}
 										<p>{event.eventDate}</p>
 										<p>{event.eventTime}</p>
-                                        {rsvps.map((rsvp) => {
-                                            if(rsvp.userId === sessionUser.id && rsvp.eventId === event.id) return <p>{rsvp.rsvpStatus}</p>
-                                        })}
+										{rsvps.map((rsvp) => {
+											if (
+												rsvp.userId ===
+													sessionUser.id &&
+												rsvp.eventId === event.id
+											)
+												return <p>{rsvp.rsvpStatus}</p>;
+										})}
 									</div>
 								</div>
 							</div>

@@ -4,6 +4,7 @@ const usersRouter = require('./users.js');
 const eventsRouter = require('./events.js');
 const groupsRouter = require('./groups.js');
 const rsvpsRouter = require('./rsvps');
+const locationsRouter = require('./locations')
 
 router.use('/session', sessionRouter);
 
@@ -14,6 +15,8 @@ router.use('/events', eventsRouter);
 router.use('/groups', groupsRouter);
 
 router.use('/rsvps', rsvpsRouter);
+
+router.use('/locations', locationsRouter);
 
 
 
