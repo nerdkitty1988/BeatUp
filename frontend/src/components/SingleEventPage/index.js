@@ -4,7 +4,7 @@ import { NavLink, useParams, useHistory } from "react-router-dom";
 import "./SingleEventPage.css";
 
 
-import * as eventActions from "../../store/event";
+import { getEvents, updateEvent, deleteEvent } from "../../store/event";
 import { getRsvps } from "../../store/rsvp";
 import { getLocations } from "../../store/location";
 
@@ -15,12 +15,12 @@ const SingleEventPage = () => {
 	const { eventId } = useParams();
     let history = useHistory();
 
-	const [eventName, setEventName] = useState();
+	const [eventName, setEventName] = useState("");
 	const [eventLocationId, setEventLocationId] = useState();
 	const [eventDate, setEventDate] = useState();
-	const [eventTime, setEventTime] = useState();
-	const [eventDescription, setEventDescription] = useState();
-	const [eventPhotoUrl, setEventPhotoUrl] = useState();
+	const [eventTime, setEventTime] = useState("");
+	const [eventDescription, setEventDescription] = useState("");
+	const [eventPhotoUrl, setEventPhotoUrl] = useState("");
 	const [eventOwnerId, setEventOwnerId] = useState();
 	const [groupId, setGroupId] = useState();
 	const [errors, setErrors] = useState([]);
@@ -29,7 +29,9 @@ const SingleEventPage = () => {
     const events = useSelector((state) => {
         return Object.values(state.eventState.eventList);
     });
+
     const event = events[eventId - 1];
+
 	const rsvps = useSelector((state) => {
         return Object.values(state.rsvpState.rsvpList);
 	});
@@ -38,7 +40,7 @@ const SingleEventPage = () => {
 	});
 
     useEffect(() => {
-        dispatch(eventActions.getEvents());
+        dispatch(getEvents());
     }, [dispatch]);
 
 	useEffect(() => {
@@ -60,15 +62,18 @@ const SingleEventPage = () => {
             eventTime,
             eventDescription,
             eventPhotoUrl,
-            eventOwnerId,
-            groupId,
         };
-        let updatedEvent = await dispatch(eventActions.updateEvent(payload))
+        let updatedEvent = await dispatch(updateEvent(payload))
         if (updatedEvent) {
-            history.push(`/events/${event.id}`);
             setShowEdit(true);
         }
     };
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+        dispatch(deleteEvent(event));
+        history.push('/events');
+    }
 
     if (!event) return null;
 
@@ -109,7 +114,7 @@ const SingleEventPage = () => {
 							))}
 						</select>
 					</label>
-					<button>New Location</button>
+					<NavLink to="/locations/add">New Location</NavLink>
 					<label>
 						Event Date
 						<input
@@ -180,6 +185,10 @@ const SingleEventPage = () => {
 						>
 							Edit Event
 						</button>
+                        <button
+                            onClick={handleDelete}>
+                                Delete Event
+                        </button>
 					</div>
 					<img
 						id="eventPhoto"

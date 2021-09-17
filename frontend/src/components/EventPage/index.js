@@ -45,7 +45,7 @@ const EventPage = () => {
 				{events.map((event) => {
 					return (
 						<NavLink
-							key={event.eventName}
+							key={event.id}
 							to={`events/${event.id}`}
 						>
 							<div className="eventContainer">
@@ -64,19 +64,19 @@ const EventPage = () => {
 												event.eventLocationId === location.id
 											)
 												return (
-                                                    <p>{location.locationName}, {location.locationStreet}, {location.locationCity}, {location.locationState}, {location.locationZip}</p>
+                                                    <p key={location.id}>{location.locationName}, {location.locationStreet}, {location.locationCity}, {location.locationState}, {location.locationZip}</p>
 
                                                 )
 										})}
-										<p>{event.eventDate}</p>
-										<p>{event.eventTime}</p>
+										<p key="eventDate">{event.eventDate}</p>
+										<p key="eventTime">{event.eventTime}</p>
 										{rsvps.map((rsvp) => {
 											if (
 												rsvp.userId ===
 													sessionUser.id &&
 												rsvp.eventId === event.id
 											)
-												return <p>{rsvp.rsvpStatus}</p>;
+												return <p key={rsvp.id}>{rsvp.rsvpStatus}</p>;
 										})}
 									</div>
 								</div>

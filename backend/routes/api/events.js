@@ -45,18 +45,15 @@ router.put(
 			eventPhotoUrl,
 			eventOwnerId,
 			groupId}
-		const event = await Event.update(
+		const event = await Event.findByPk(id);
 
-            details,
-            {
-                where: {id},
+        const newEvent = await event.update(details);
+        console.log(newEvent, "New Event")
 
-            }
+
+		return res.json(
+			newEvent,
 		);
-
-		return res.json({
-			event,
-		});
 	})
 );
 

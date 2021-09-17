@@ -49,6 +49,11 @@ export const updateEvent = (newEvent) => async (dispatch) => {
     return event;
 };
 
+export const deleteEvent = (event) => async (dispatch) => {
+    dispatch(remove(event));
+
+}
+
 export const getEvents = () => async (dispatch) => {
 	const res = await csrfFetch("/api/events");
 
@@ -73,10 +78,13 @@ const eventReducer = (state = initialState, action) => {
 			return { ...state, eventList: { ...newEventList } };
 		}
 		case ADD_ONE: {
+            console.log (action.event, "Event ID")
+            console.log(state.eventList, "Event List")
 			const newEventList = {
 				...state.eventList,
 				[action.event.id]: action.event,
 			};
+            console.log(newEventList, "New List")
 
 			return {
 				...state,
@@ -84,13 +92,9 @@ const eventReducer = (state = initialState, action) => {
 			};
 		};
 		case REMOVE_EVENT: {
-            const list = Object.values(state.eventList);
-			return {
-				...state,
-				eventList: list.filter(
-					(event) => event.id !== action.eventId
-				),
-			};
+            const current = {...state}
+            delete current.eventList[action.event.id];
+            return current;
 		}
 		default:
 			return state;
