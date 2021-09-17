@@ -28,10 +28,11 @@ export const createEvent = (newEvent) => async (dispatch) => {
 		body: JSON.stringify(newEvent),
 	});
 	const event = await res.json();
+    console.log(event)
 	if (res.ok) {
-		dispatch(addOneEvent(event));
-		return event;
+		await dispatch(addOneEvent(event));
 	}
+    return event;
 };
 
 export const updateEvent = (newEvent) => async (dispatch) => {
@@ -44,13 +45,25 @@ export const updateEvent = (newEvent) => async (dispatch) => {
 	});
 	const event = await res.json();
 	if (res.ok) {
-		dispatch(addOneEvent(event));
+		await dispatch(addOneEvent(event));
 	}
     return event;
 };
 
 export const deleteEvent = (event) => async (dispatch) => {
-    dispatch(remove(event));
+    const res = await csrfFetch(`/api/events/${event.id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(event),
+    });
+    const eventId = await res.json();
+    console.log(eventId)
+    if (res.ok) {
+        await dispatch(remove(eventId));
+    }
+    return eventId;
 
 }
 
@@ -78,8 +91,7 @@ const eventReducer = (state = initialState, action) => {
 			return { ...state, eventList: { ...newEventList } };
 		}
 		case ADD_ONE: {
-            console.log (action.event, "Event ID")
-            console.log(state.eventList, "Event List")
+
 			const newEventList = {
 				...state.eventList,
 				[action.event.id]: action.event,
@@ -92,9 +104,10 @@ const eventReducer = (state = initialState, action) => {
 			};
 		};
 		case REMOVE_EVENT: {
-            const current = {...state}
-            delete current.eventList[action.event.id];
-            return current;
+            let newState = {...state};
+            delete newState.eventList[action.eventId];
+            return newState;
+
 		}
 		default:
 			return state;

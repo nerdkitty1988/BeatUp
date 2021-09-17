@@ -39,7 +39,7 @@ const EventPage = () => {
 	return (
 		<div className="eventListCont">
             <div id="addEventNav">
-                <NavLink id="addEvent" to={`events/add`}>Add New Event</NavLink>
+                <NavLink id="addEvent" to={`/events/add`}>Add New Event</NavLink>
             </div>
 			<nav>
 				{events.map((event) => {
@@ -68,8 +68,8 @@ const EventPage = () => {
 
                                                 )
 										})}
-										<p key="eventDate">{event.eventDate}</p>
-										<p key="eventTime">{event.eventTime}</p>
+										<p key={event.eventDate}>{event.eventDate}</p>
+										<p key={event.eventTime}>{event.eventTime}</p>
 										{rsvps.map((rsvp) => {
 											if (
 												rsvp.userId ===

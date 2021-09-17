@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import EventPage from "./components/EventPage"
 import HomePage from "./components/HomePage";
 import SingleEventPage from "./components/SingleEventPage";
+import AddEventPage from "./components/AddEventPage";
 
 function App() {
 	const dispatch = useDispatch();
@@ -30,6 +31,9 @@ function App() {
 					<Route path="/signup">
 						<SignupFormPage />
 					</Route>
+                    <Route exact path="/events/add">
+                        <AddEventPage />
+                    </Route>
                     <Route path="/events/:eventId">
                         <SingleEventPage />
                     </Route>

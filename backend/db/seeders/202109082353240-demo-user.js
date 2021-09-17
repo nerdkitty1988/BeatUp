@@ -8,7 +8,7 @@ module.exports = {
 			"Users",
 			[
 				{
-					email: "demo@user.io",
+					email: "email@email.com",
 					username: "Demo-lition",
 					firstName: "Joe",
 					lastName: "Schmoe",
