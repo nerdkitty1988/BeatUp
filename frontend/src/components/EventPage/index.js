@@ -38,17 +38,22 @@ const EventPage = () => {
 
 	return (
 		<div className="eventListCont">
+            <div id="addEventNav">
+                <NavLink id="addEvent" to={`events/add`}>Add New Event</NavLink>
+            </div>
 			<nav>
 				{events.map((event) => {
 					return (
 						<NavLink
-							key={event.eventName}
+							key={event.id}
 							to={`events/${event.id}`}
 						>
 							<div className="eventContainer">
 								<img
 									id="eventPhoto"
-									src={event.eventPhotoUrl}
+									src={
+                                        event.eventPhotoUrl ? event.eventPhotoUrl : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommonlook.com%2Ftribe-related-events-placeholder%2F&psig=AOvVaw2KIYVmzCCF1e8p8Hyfj_Px&ust=1631898035505000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKjD04_8g_MCFQAAAAAdAAAAABAE"
+                                    }
 									alt="event"
 								/>
 								<div className="eventInfo">
@@ -59,19 +64,19 @@ const EventPage = () => {
 												event.eventLocationId === location.id
 											)
 												return (
-                                                    <p>{location.locationName}, {location.locationStreet}, {location.locationCity}, {location.locationState}, {location.locationZip}</p>
+                                                    <p key={location.id}>{location.locationName}, {location.locationStreet}, {location.locationCity}, {location.locationState}, {location.locationZip}</p>
 
                                                 )
 										})}
-										<p>{event.eventDate}</p>
-										<p>{event.eventTime}</p>
+										<p key="eventDate">{event.eventDate}</p>
+										<p key="eventTime">{event.eventTime}</p>
 										{rsvps.map((rsvp) => {
 											if (
 												rsvp.userId ===
 													sessionUser.id &&
 												rsvp.eventId === event.id
 											)
-												return <p>{rsvp.rsvpStatus}</p>;
+												return <p key={rsvp.id}>{rsvp.rsvpStatus}</p>;
 										})}
 									</div>
 								</div>
