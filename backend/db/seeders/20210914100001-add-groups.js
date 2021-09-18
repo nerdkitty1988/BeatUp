@@ -20,13 +20,18 @@ module.exports = {
 					description: "This group is for any MMA related events.",
 				},
 				{
-					groupName: "Kung Fu",
+					groupName: "Taekwondo",
 					description:
-						"This group is for any Kung Fu related events.",
+						"This group is for any Taekwondo related events.",
 				},
 				{
 					groupName: "Aikido",
 					description: "This group is for any Aikida related events.",
+				},
+				{
+					groupName: "Las Vegas Fights",
+					description:
+						"This group is for those who are in or near Las Vegas, NV",
 				},
 			],
 			{}

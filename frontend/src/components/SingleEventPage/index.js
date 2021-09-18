@@ -47,6 +47,8 @@ const SingleEventPage = () => {
 	const [errors, setErrors] = useState([]);
 	const [showEdit, setShowEdit] = useState(true);
 
+    const readDate = new Date(event.eventDate).toDateString();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -122,7 +124,7 @@ const SingleEventPage = () => {
 							className="editEventInput"
 							value={eventDate}
 							onChange={(e) => {
-                                let updatedDate = e.target.value.toString();
+                                let updatedDate = e.target.value;
                                 setEventDate(updatedDate)}}
 						/>
 					</label>
@@ -156,19 +158,6 @@ const SingleEventPage = () => {
 							onChange={(e) => setEventPhotoUrl(e.target.value)}
 						/>
 					</label>
-					{/* if {groups}
-                <label>
-                    Group
-                    <select
-                        id="group"
-                        placeholder="Your Groups"
-                        onChange={(e) => setgroupId(e.target.value.id)}
-                    >
-                        {groups.map((group, idx) => (
-                            <option value={group[idx]}>{group.name}</option>
-                        ))}
-                    </select>
-                </label> */}
 					<button type="submit">Submit</button>
                     <button type="button" onClick={handleCancelClick}>Cancel</button>
 				</form>
@@ -209,7 +198,7 @@ const SingleEventPage = () => {
 							);
 					})}
 					<p key="eventDesc">{event.eventDescription}</p>
-					<p key="eventDate">{event.eventDate}</p>
+					<p key="eventDate">{readDate}</p>
 					<p key="eventTime">{event.eventTime}</p>
 					{rsvps.map((rsvp) => {
 						if (

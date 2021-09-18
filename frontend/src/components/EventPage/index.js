@@ -43,6 +43,7 @@ const EventPage = () => {
             </div>
 			<nav>
 				{events.map((event) => {
+                    const readDate = new Date(event.eventDate).toDateString();
 					return (
 						<NavLink
 							key={event.id}
@@ -68,7 +69,7 @@ const EventPage = () => {
 
                                                 )
 										})}
-										<p key={event.eventDate}>{event.eventDate}</p>
+										<p key={event.eventDate}>{readDate}</p>
 										<p key={event.eventTime}>{event.eventTime}</p>
 										{rsvps.map((rsvp) => {
 											if (
