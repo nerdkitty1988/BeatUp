@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    eventComment: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
   }, {});
   EventComments.associate = function(models) {
     // associations can be defined here

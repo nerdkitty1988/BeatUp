@@ -15,22 +15,7 @@ const SingleEventPage = () => {
 	const { eventId } = useParams();
     let history = useHistory();
 
-	const [eventName, setEventName] = useState("");
-	const [eventLocationId, setEventLocationId] = useState();
-	const [eventDate, setEventDate] = useState();
-	const [eventTime, setEventTime] = useState("");
-	const [eventDescription, setEventDescription] = useState("");
-	const [eventPhotoUrl, setEventPhotoUrl] = useState("");
-	const [eventOwnerId, setEventOwnerId] = useState();
-	const [groupId, setGroupId] = useState();
-	const [errors, setErrors] = useState([]);
-	const [showEdit, setShowEdit] = useState(true);
-
-    const events = useSelector((state) => {
-        return Object.values(state.eventState.eventList);
-    });
-
-    const event = events[eventId - 1];
+    const event = useSelector(state => state.eventState.eventList[eventId]);
 
 	const rsvps = useSelector((state) => {
         return Object.values(state.rsvpState.rsvpList);
@@ -51,6 +36,20 @@ const SingleEventPage = () => {
         dispatch(getLocations());
 	}, [dispatch]);
 
+	const [eventName, setEventName] = useState(event.eventName);
+	const [eventLocationId, setEventLocationId] = useState(locations[event.eventLocationId]);
+	const [eventDate, setEventDate] = useState(event.eventDate);
+	const [eventTime, setEventTime] = useState(event.eventTime);
+	const [eventDescription, setEventDescription] = useState(event.eventDescription);
+	const [eventPhotoUrl, setEventPhotoUrl] = useState(event.eventPhotoUrl);
+	const [eventOwnerId, setEventOwnerId] = useState();
+	const [groupId, setGroupId] = useState();
+	const [errors, setErrors] = useState([]);
+	const [showEdit, setShowEdit] = useState(true);
+
+    const readDate = new Date(event.eventDate).toDateString();
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
@@ -69,10 +68,15 @@ const SingleEventPage = () => {
         }
     };
 
-    const handleDelete = (e) => {
+    const handleDelete = async (e) => {
         e.preventDefault();
-        dispatch(deleteEvent(event));
+        await dispatch(deleteEvent(event));
         history.push('/events');
+    };
+
+    const handleCancelClick = (e) => {
+        e.preventDefault();
+        setShowEdit(true)
     }
 
     if (!event) return null;
@@ -92,7 +96,6 @@ const SingleEventPage = () => {
 						<input
 							type="text"
 							className="editEventInput"
-							defaultValue={event.eventName}
 							value={eventName}
 							onChange={(e) => setEventName(e.target.value)}
 						/>
@@ -101,7 +104,6 @@ const SingleEventPage = () => {
 						Location
 						<select
 							id="locations"
-							defaultValue={locations[event.eventLocationId]}
                             value={eventLocationId}
 							onChange={(e) =>
 								setEventLocationId(e.target.value)
@@ -120,10 +122,9 @@ const SingleEventPage = () => {
 						<input
 							type="date"
 							className="editEventInput"
-							defaultValue={event.eventDate}
 							value={eventDate}
 							onChange={(e) => {
-                                let updatedDate = e.target.value.toString();
+                                let updatedDate = e.target.value;
                                 setEventDate(updatedDate)}}
 						/>
 					</label>
@@ -132,7 +133,6 @@ const SingleEventPage = () => {
 						<input
 							type="time"
 							className="editEventInput"
-							defaultValue={event.eventTime}
 							value={eventTime}
 							onChange={(e) => setEventTime(e.target.value)}
 						/>
@@ -142,7 +142,6 @@ const SingleEventPage = () => {
 						<textarea
 							className="editEventInput"
 							value={eventDescription}
-							defaultValue={event.eventDescription}
 							rows="10"
 							col="55"
 							onChange={(e) =>
@@ -156,25 +155,11 @@ const SingleEventPage = () => {
 							type="url"
 							className="editEventInput"
 							value={eventPhotoUrl}
-                            defaultValue={event.eventPhotoUrl}
-							placeholder={event.eventPhotoUrl}
 							onChange={(e) => setEventPhotoUrl(e.target.value)}
 						/>
 					</label>
-					{/* if {groups}
-                <label>
-                    Group
-                    <select
-                        id="group"
-                        placeholder="Your Groups"
-                        onChange={(e) => setgroupId(e.target.value.id)}
-                    >
-                        {groups.map((group, idx) => (
-                            <option value={group[idx]}>{group.name}</option>
-                        ))}
-                    </select>
-                </label> */}
 					<button type="submit">Submit</button>
+                    <button type="button" onClick={handleCancelClick}>Cancel</button>
 				</form>
 			</div>
 			<div className="singleEventCont">
@@ -213,7 +198,7 @@ const SingleEventPage = () => {
 							);
 					})}
 					<p key="eventDesc">{event.eventDescription}</p>
-					<p key="eventDate">{event.eventDate}</p>
+					<p key="eventDate">{readDate}</p>
 					<p key="eventTime">{event.eventTime}</p>
 					{rsvps.map((rsvp) => {
 						if (
