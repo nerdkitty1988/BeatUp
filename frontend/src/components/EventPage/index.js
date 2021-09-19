@@ -14,23 +14,11 @@ const EventPage = () => {
 	const events = useSelector((state) => {
 		return Object.values(state.eventState.eventList);
 	});
-	const rsvps = useSelector((state) => {
-		return Object.values(state.rsvpState.rsvpList);
-	});
-	const locations = useSelector((state) => {
-		return Object.values(state.locationState.locationList);
-	});
 
-	useEffect(() => {
-		dispatch(getLocations());
-	}, [dispatch]);
+    console.log(events);
 
 	useEffect(() => {
 		dispatch(getEvents());
-	}, [dispatch]);
-
-	useEffect(() => {
-		dispatch(getRsvps());
 	}, [dispatch]);
 
 	if (!events) return null;
@@ -42,11 +30,11 @@ const EventPage = () => {
 					<NavLink className="eventGroupNav" to={`/events/add`}>
 						<button className="eventSelectButton">Events</button>
 					</NavLink>
-                    <NavLink class="eventGroupNav" to={`/events/add`}>
-                        <button className="eventGroupButton">Groups</button>
+					<NavLink class="eventGroupNav" to={`/events/add`}>
+						<button className="eventGroupButton">Groups</button>
 					</NavLink>
-                    <NavLink id="addEvent" to={`/events/add`}>
-                        <button id="addEventButton">Create Event</button>
+					<NavLink id="addEvent" to={`/events/add`}>
+						<button id="addEventButton">Create Event</button>
 					</NavLink>
 				</div>
 				<nav>
@@ -54,6 +42,11 @@ const EventPage = () => {
 						const readDate = new Date(
 							event.eventDate
 						).toDateString();
+                        const location = event.Location;
+                        const rsvps = event.Rsvps;
+                        const userRsvp = rsvps.filter((rsvp) => {
+                            return rsvp.userId === sessionUser.id && rsvp.eventId === event.id;
+                        })
 						return (
 							<NavLink
 								className="eventNavWhole"
@@ -73,54 +66,13 @@ const EventPage = () => {
 										/>
 									</div>
 									<div className="eventInfo">
-										<p key={event.eventDate}>{readDate}@{event.eventTime}</p>
+										<p key={event.eventDate}>
+											{readDate}@{event.eventTime}
+										</p>
 										<h3>{event.eventName}</h3>
-										<div>
-											{locations.map((location) => {
-												if (
-													event.eventLocationId ===
-													location.id
-												)
-													return (
-														<p
-															key={location.id}
-															className="address"
-														>
-															{
-																location.locationName
-															}
-															,{" "}
-															{
-																location.locationStreet
-															}
-															,{" "}
-															{
-																location.locationCity
-															}
-															,{" "}
-															{
-																location.locationState
-															}
-															,{" "}
-															{
-																location.locationZip
-															}
-														</p>
-													);
-											})}
-											{rsvps.map((rsvp) => {
-												if (
-													rsvp.userId ===
-														sessionUser.id &&
-													rsvp.eventId === event.id
-												)
-													return (
-														<p key={rsvp.id}>
-															{rsvp.rsvpStatus}
-														</p>
-													);
-											})}
-										</div>
+                                        <p>{location.locationCity}, {location.locationState}</p>
+                                        <p>{userRsvp.length !== 0 ? userRsvp[0].rsvpStatus : "Not Attending"}</p>
+                                        <p>Participants: {event.EventParticipants.length}</p>
 									</div>
 								</div>
 							</NavLink>
