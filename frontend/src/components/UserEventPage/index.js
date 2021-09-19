@@ -22,16 +22,9 @@ const UserEventPage = () => {
 	});
 
 	useEffect(() => {
-		dispatch(getLocations());
-	}, [dispatch]);
-
-	useEffect(() => {
 		dispatch(getUserEvents(sessionUser));
 	}, [dispatch]);
 
-	useEffect(() => {
-		dispatch(getRsvps());
-	}, [dispatch]);
 
 	if (!events) return null;
 

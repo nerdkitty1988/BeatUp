@@ -137,7 +137,14 @@ router.get(
                 },
                 {
                     model: Rsvp,
-                }
+                },
+                {
+                    model: Group,
+                },
+                {
+                    model: EventComment,
+                    order: [['createdAt', 'DESC']],
+                },
 			],
 		});
 		return res.json(events);

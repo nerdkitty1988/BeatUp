@@ -27,14 +27,14 @@ const EventPage = () => {
 		<div className="fullpage">
 			<div className="eventListCont">
 				<div id="addEventNav">
-					<NavLink className="eventGroupNav" to={`/events/add`}>
+					<NavLink className="eventGroupNav" to={`/events`}>
 						<button type="button" className="eventSelectButton">Events</button>
 					</NavLink>
-					<NavLink type="button" className="eventGroupNav" to={`/groups`}>
-						<button className="eventGroupButton">Groups</button>
+					<NavLink className="eventGroupNav" to={`/groups`}>
+						<button type="button" className="eventGroupButton">Groups</button>
 					</NavLink>
-					<NavLink type="button" id="addEvent" to={`/events/add`}>
-						<button id="addEventButton">Create Event</button>
+					<NavLink id="addEvent" to={`/events/add`}>
+						<button type="button" id="addEventButton">Create Event</button>
 					</NavLink>
 				</div>
 				<nav>
