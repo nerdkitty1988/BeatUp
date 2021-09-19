@@ -127,6 +127,7 @@ module.exports = (sequelize, DataTypes) => {
         User.belongsToMany(models.Event, participantColumnMapping);
         User.belongsToMany(models.Event, likeColumnMapping);
         User.belongsToMany(models.Event, rsvpColumnMapping);
+        User.hasMany(models.EventParticipant, {foreignKey: "userId"})
     };
 
 

@@ -19,7 +19,6 @@ router.use('/rsvps', rsvpsRouter);
 router.use('/locations', locationsRouter);
 
 
-
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
 });

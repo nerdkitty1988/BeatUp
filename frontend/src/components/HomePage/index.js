@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./HomePage.css";
 
+import NextEventPage from "../NextEventPage"
+
 function HomePage() {
     const sessionUser = useSelector((state) => state.session.user);
 
@@ -22,10 +24,12 @@ function HomePage() {
     }else{
         return (
             <div id="homeContainer">
-                <div>
-                    <h1>Welcome {sessionUser.username}</h1>
-                    <h2>Find new </h2>
-                    <NavLink to="/events">Events</NavLink>
+                <div className="nextEvent">
+                    <h1>Your next event</h1>
+                    <NavLink id="seeAllButton" to={`/events/user/${sessionUser.id}`}>Events</NavLink>
+                    <div className="nextEventCont">
+                        <NextEventPage sessionUser={sessionUser} />
+                    </div>
                 </div>
             </div>
         )

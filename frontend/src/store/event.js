@@ -76,6 +76,15 @@ export const getEvents = () => async (dispatch) => {
 	}
 };
 
+export const getUserEvents = (user) => async(dispatch) => {
+    const res = await csrfFetch(`/api/events/user/${user.id}`);
+
+    if (res.ok) {
+        const list = await res.json();
+        dispatch(load(list));
+    }
+}
+
 const initialState = {
 	eventList: {},
 };

@@ -8,7 +8,6 @@ import logo from "./beatupLogo.png";
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
 
-
 	let sessionLinks;
 	if (sessionUser) {
 		sessionLinks = <ProfileButton user={sessionUser} />;
@@ -30,18 +29,23 @@ function Navigation({ isLoaded }) {
 	return (
 		<div id="navBar">
 			<div id="logo">
-				<img className="logo-img" src={logo} alt="beatupLogo" />
+				<NavLink exact to="/" className="logo">
+					<img className="logo-img" src={logo} alt="beatupLogo" />
+				</NavLink>
 			</div>
-            <div className="searchBar">
-                <form>
-                    <input id="searchInput" type="text" placeholder="Search in events and groups..." />
-                    <button id="searchButton" type="submit">🥊</button>
-                </form>
-            </div>
-			<div className="navLinks">
-				<NavLink exact to="/" className="logo"></NavLink>
-				{isLoaded && sessionLinks}
+			<div className="searchBar">
+				<form>
+					<input
+						id="searchInput"
+						type="text"
+						placeholder="Search in events and groups..."
+					/>
+					<button id="searchButton" type="submit">
+						🥊
+					</button>
+				</form>
 			</div>
+			<div className="navLinks">{isLoaded && sessionLinks}</div>
 		</div>
 	);
 }

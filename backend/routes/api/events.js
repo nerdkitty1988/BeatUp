@@ -1,19 +1,45 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
-const { Event, Rsvp, sequelize } = require("../../db/models");
+const { Event, EventParticipant, User } = require("../../db/models");
 
 const router = express.Router();
 
 router.get(
-	"/",
-	asyncHandler(async function (req, res) {
-		const events = await Event.findAll();
-		return res.json(events);
-	})
+    "/",
+    asyncHandler(async function (req, res) {
+        const events = await Event.findAll();
+        return res.json(events);
+    })
 );
 
+router.post("/", asyncHandler(async function (req, res) {
+    const {
+        eventName,
+        eventLocationId,
+        eventDate,
+        eventTime,
+        eventDescription,
+        eventPhotoUrl,
+        eventOwnerId,
+        groupId,
+    } = req.body;
+
+    const details = {
+        eventName,
+        eventLocationId,
+        eventDate,
+        eventTime,
+        eventDescription,
+        eventPhotoUrl,
+        eventOwnerId,
+        groupId,
+    };
+    const event = await Event.create(details);
+
+}))
+
 router.get(
-	"/:eventId",
+	"/:eventId(\\d+)",
 	asyncHandler(async function (req, res) {
 		const event = await Event.findOne(req.params.id);
 
@@ -22,7 +48,7 @@ router.get(
 );
 
 router.put(
-	"/:eventId",
+	"/:eventId(\\d+)",
 	asyncHandler(async (req, res) => {
 		const {
 			id,
@@ -55,34 +81,9 @@ router.put(
 	})
 );
 
-router.post("/", asyncHandler(async function (req, res) {
-    const {
-        eventName,
-        eventLocationId,
-        eventDate,
-        eventTime,
-        eventDescription,
-        eventPhotoUrl,
-        eventOwnerId,
-        groupId,
-    } = req.body;
-
-    const details = {
-        eventName,
-        eventLocationId,
-        eventDate,
-        eventTime,
-        eventDescription,
-        eventPhotoUrl,
-        eventOwnerId,
-        groupId,
-    };
-    const event = await Event.create(details);
-
-}))
 
 router.delete(
-	"/:id",
+	"/:id(\\d+)",
 	asyncHandler(async function (req, res) {
 		const { id } = req.body;
         console.log(id)
@@ -96,5 +97,18 @@ router.delete(
         return res.json( id )
 	})
 );
+
+router.get("/user/:userId(\\d+)", asyncHandler(async function (req, res) {
+    const userId = 1;
+    const events = await Event.findAll({
+        include: [{
+            model: EventParticipant,
+            where: {
+                userId
+            }
+        }],
+    });
+    return res.json(events);
+}))
 
 module.exports = router;
