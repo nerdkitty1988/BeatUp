@@ -30,7 +30,7 @@ const NextEventPage = ({sessionUser}) => {
         return currentNext;
     }
     const nextEvent = nextEventFind(events);
-
+    const readDate = nextEvent ? (new Date(nextEvent.eventDate).toDateString()) : new Date();
     console.log(nextEvent);
     if (!events) return (
         <div className="noEventsCont">
@@ -44,7 +44,15 @@ const NextEventPage = ({sessionUser}) => {
     return (
         <div id="singleEventCont">
             <div className="singleEvent">
-                <h1>{nextEvent.eventName}</h1>
+                <div className="singleEventPhotoCont">
+                    <img id="singleEventPic" src={nextEvent.eventPhotoUrl}/>
+                </div>
+                <div className="singleEventInfoCont">
+                    <p id="sEventDate">{readDate}</p>
+                    <p id="sEventName">{nextEvent.eventName}</p>
+                    <p id="sEventDescription">{nextEvent.eventDescription}</p>
+
+                </div>
             </div>
         </div>
     )
