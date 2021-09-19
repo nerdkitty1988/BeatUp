@@ -1,15 +1,91 @@
-#eventPhoto {
-    width: 15%;
-}
+
 .eventListCont {
-    display:block;
-    margin-top: 75px;
-    width: 100%;
+    display: flex;
+    margin-top: 175px;
+    width:800px;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
 
 .eventContainer {
-    display: flex;
-    flex-direction: row;
+    display: inline-flex;
+    justify-content: left;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.356);
+    width: 100%;
+    align-items: center;
+    padding-left: 15px;
+    margin-left: 10px;
+}
+.eventPhotoDiv {
+    width: 150px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+#eventPhoto {
+    border-radius: 12px;
+    width: 100%;
+}
+.fullpage {
+    width: 100%
+}
+
+.eventNavWhole {
+    text-decoration: none;
+}
+
+.eventNavWhole h3 {
+    color: black;
+    font-weight: 500;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.eventNavWhole p {
+    color: rgba(0, 0, 0, 0.527);
+    font-weight: 500;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.eventInfo {
+    padding-left: 10px;
+    margin-top: -45px;
+}
+
+#editEventNav {
+    justify-content: left;
+    width: 100%;
+
+}
+
+.eventGroupButton {
+    font-size: 25px;
+    font-weight: 700;
+    background-color: white;
+    border: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: grey;
+
+}
+.eventSelectButton {
+    font-size: 25px;
+    font-weight: 700;
+    background-color: white;
+    border: none;
+    border-bottom: 4px solid #008294;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #008294;
+}
+#addEventButton {
+    background-color: white;
+    border-color: #008294;
+    color: #008294;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.151);
+    font-weight: 700;
 }
