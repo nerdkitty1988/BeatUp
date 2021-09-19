@@ -18,8 +18,12 @@ const NextEventPage = () => {
 		return currentNext;
 	});
 
-	const locations = useSelector((state) => {
-		return Object.values(state.locationState.locationList);
+	const location = useSelector((state) => {
+		let locationSearch = Object.values(state.locationState.locationList);
+        const thisLocation = locationSearch.filter ((aLocation) => {
+            return aLocation.id === nextEvent.eventLocationId;
+        })
+        return thisLocation[0];
 	});
 
 	useEffect(() => {
@@ -50,7 +54,7 @@ const NextEventPage = () => {
 
 	return (
 		<div id="singleEventCont">
-			<NavLink to={`/events/${nextEvent.id}`}>
+			<NavLink id="nextEventNav" to={`/events/${nextEvent.id}`}>
 				<div className="singleEvent">
 					<div className="singleEventPhotoCont">
 						<img
@@ -59,11 +63,12 @@ const NextEventPage = () => {
 						/>
 					</div>
 					<div className="singleEventInfoCont">
-						<p id="sEventDate">{readDate}</p>
+						<p id="sEventDate">{readDate}@{nextEvent.eventTime}</p>
 						<p id="sEventName">{nextEvent.eventName}</p>
 						<p id="sEventDescription">
 							{nextEvent.eventDescription}
 						</p>
+                        <p>{location.locationCity}, {location.locationState}</p>
 					</div>
 				</div>
 			</NavLink>

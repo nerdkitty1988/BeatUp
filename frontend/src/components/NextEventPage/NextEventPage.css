@@ -13,4 +13,9 @@
 .singleEvent {
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+#nextEventNav {
+    text-decoration: none;
 }
