@@ -20,9 +20,6 @@ function HomePage() {
 		return currentNext;
 	});
 
-
-
-
 	useEffect(() => {
 		dispatch(getUserEvents(sessionUser));
 	}, [dispatch]);
@@ -45,19 +42,25 @@ function HomePage() {
 			<div className="nextEvent">
 				<div id="nextEventTop">
 					<h1>Your next event</h1>
-					<NavLink
-						id="seeAllButton"
-						to={`/events/user/${sessionUser.id}`}
-					>
-						<button id="userEventsButton">
-							All {sessionUser.username}'s Events
-						</button>
-					</NavLink>
+					<div>
+						<NavLink
+							id="seeAllButton"
+							to={`/events/user/${sessionUser.id}`}
+						>
+							<button className="userEventsButton">
+								All {sessionUser.username}'s Events
+							</button>
+						</NavLink>
+						<NavLink to={"/events"}>
+							<button className="userEventsButton">
+								All Events
+							</button>
+						</NavLink>
+					</div>
 				</div>
 				<div className="nextEventCont">
 					<NextEventPage nextEvent={nextEvent} />
 				</div>
-				<NavLink to="/events">All Events</NavLink>
 			</div>
 		</div>
 	);

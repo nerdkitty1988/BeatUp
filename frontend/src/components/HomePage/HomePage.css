@@ -6,14 +6,20 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content:space-between;
+    justify-content:space-around;
     width: 100%;
 }
 
-#userEventsButton {
+.userEventsButton {
     padding: 12px;
     border-radius: 8px;
     border: none;
     background-color: #ed1c3fc9;
     color: white;
+    margin: 2px;
+    box-shadow: 0px 0px 2px 1px rgba(128, 128, 128, 0.678);
+}
+
+.nextEventCont {
+    width: 100%;
 }
