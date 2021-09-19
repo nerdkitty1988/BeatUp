@@ -8,20 +8,23 @@ import logo from "./beatupLogo.png";
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const [credential, setCredential] = useState("");
 	const [password, setPassword] = useState("");
 	const [errors, setErrors] = useState([]);
 
-    const handleDemoLogin = (e) => {
+	const handleDemoLogin = (e) => {
 		e.preventDefault();
 		setErrors([]);
-		return dispatch(sessionActions.login( {credential: "email@email.com", password: "password"} )).catch(
-			async (res) => {
-				const data = await res.json();
-				if (data && data.errors) setErrors(data.errors);
-			}
-		);
+		return dispatch(
+			sessionActions.login({
+				credential: "email@email.com",
+				password: "password",
+			})
+		).catch(async (res) => {
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		});
 	};
 
 	let sessionLinks;
@@ -37,7 +40,13 @@ function Navigation({ isLoaded }) {
 					<NavLink to="/login" className="loginSignup">
 						Log In
 					</NavLink>
-                    <button id="demoButton" type="button" onClick={handleDemoLogin}>Demo User</button>
+					<button
+						id="demoButton"
+						type="button"
+						onClick={handleDemoLogin}
+					>
+						Demo User
+					</button>
 				</div>
 			</>
 		);
@@ -46,9 +55,9 @@ function Navigation({ isLoaded }) {
 	return (
 		<div id="navBar">
 			<div id="logo">
-				<NavLink exact to="/" className="logo">
-					<img className="logo-img" src={logo} alt="beatupLogo" />
-				</NavLink>
+                <a href='/'>
+				    <img className="logo-img" src={logo} alt="beatupLogo" />
+                </a>
 			</div>
 			<div className="searchBar">
 				<form>

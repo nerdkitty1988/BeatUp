@@ -5,41 +5,19 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./NextEventPage.css";
 
-const NextEventPage = () => {
-	const dispatch = useDispatch();
-	const sessionUser = useSelector((state) => state.session.user);
+const NextEventPage = ({nextEvent}) => {
 
-	const nextEvent = useSelector((state) => {
-		let eventSearch = Object.values(state.eventState.eventList);
-		let currentNext = eventSearch[0];
-		eventSearch.forEach((event) => {
-			if (event.eventDate < currentNext.eventDate) currentNext = event;
-		});
-		return currentNext;
-	});
+    let location;
 
-	const location = useSelector((state) => {
-		let locationSearch = Object.values(state.locationState.locationList);
-		if (nextEvent) {
-			const thisLocation = locationSearch.filter((aLocation) => {
-				return aLocation.id === nextEvent.eventLocationId;
-			});
-			return thisLocation[0];
-		}
-	});
-
-	useEffect(() => {
-		dispatch(getLocations());
-	}, [dispatch]);
-
-	useEffect(() => {
-		dispatch(getUserEvents(sessionUser));
-	}, [dispatch]);
+    if(nextEvent) {
+        location = nextEvent.Location;
+    };
 
 	const readDate = nextEvent
 		? new Date(nextEvent.eventDate).toDateString()
 		: new Date();
 	console.log(nextEvent);
+    console.log(location)
 	if (!nextEvent || !location)
 		return (
 			<div className="singleNoEventCont">

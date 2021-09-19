@@ -30,7 +30,7 @@ const EventPage = () => {
 					<NavLink className="eventGroupNav" to={`/events/add`}>
 						<button className="eventSelectButton">Events</button>
 					</NavLink>
-					<NavLink class="eventGroupNav" to={`/events/add`}>
+					<NavLink className="eventGroupNav" to={`/events/add`}>
 						<button className="eventGroupButton">Groups</button>
 					</NavLink>
 					<NavLink id="addEvent" to={`/events/add`}>

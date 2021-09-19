@@ -132,6 +132,12 @@ router.get(
 						userId,
 					},
 				},
+                {
+                    model: Location,
+                },
+                {
+                    model: Rsvp,
+                }
 			],
 		});
 		return res.json(events);
