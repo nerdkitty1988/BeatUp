@@ -110,10 +110,10 @@ module.exports = (sequelize, DataTypes) => {
             as: 'groupParticipants'
         };
         const likeColumnMapping = {
-            through: "EventLikes",
+            through: "EventLike",
             otherKey: "userId",
             foreignKey: "eventId",
-            as: "eventLikes",
+            as: "eventLikesUser",
         };
         const rsvpColumnMapping = {
             through: 'Rsvp',
@@ -127,7 +127,11 @@ module.exports = (sequelize, DataTypes) => {
         User.belongsToMany(models.Event, participantColumnMapping);
         User.belongsToMany(models.Event, likeColumnMapping);
         User.belongsToMany(models.Event, rsvpColumnMapping);
-        User.hasMany(models.EventParticipant, {foreignKey: "userId"})
+        User.hasMany(models.EventParticipant, {foreignKey: "userId"});
+        User.hasMany(models.Rsvp, {foreignKey: "userId"});
+        User.hasMany(models.EventLike, {foreignKey: "userId"});
+        User.hasMany(models.EventComment, {foreignKey: "userId"});
+        User.hasMany(models.Event, {foreignKey: "eventOwnerId"})
     };
 
 

@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-	const EventLikes = sequelize.define(
-		"EventLikes",
+	const EventLike = sequelize.define(
+		"EventLike",
 		{
 			userId: {
 				type: DataTypes.INTEGER,
@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
 		},
 		{}
 	);
-	EventLikes.associate = function (models) {
+	EventLike.associate = function (models) {
 		// associations can be defined here
-		EventLikes.belongsTo(models.User, { foreignKey: "userId" });
-		EventLikes.belongsTo(models.Event, { foreignKey: "eventId" });
+		EventLike.belongsTo(models.User, { foreignKey: "userId" });
+		EventLike.belongsTo(models.Event, { foreignKey: "eventId" });
 	};
-	return EventLikes;
+	return EventLike;
 };
