@@ -22,7 +22,16 @@ const NextEventPage = ({sessionUser}) => {
 		dispatch(getUserEvents(sessionUser));
 	}, [dispatch]);
 
+    const nextEventFind = (events) => {
+        let currentNext = events[0];
+        events.forEach((event) => {
+            if(event.eventDate < currentNext.eventDate) currentNext = event;
+        });
+        return currentNext;
+    }
+    const nextEvent = nextEventFind(events);
 
+    console.log(nextEvent);
     if (!events) return (
         <div className="noEventsCont">
             <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fimages%2Fevents&psig=AOvVaw3oTD82PR-jFjb8kEWhFZXU&ust=1632082097287000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJDCpuWpifMCFQAAAAAdAAAAABAD" />
@@ -32,10 +41,10 @@ const NextEventPage = ({sessionUser}) => {
         </div>
     );
 
-    console.log(events)
     return (
         <div id="singleEventCont">
             <div className="singleEvent">
+                <h1>{nextEvent.eventName}</h1>
             </div>
         </div>
     )

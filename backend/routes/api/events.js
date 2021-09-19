@@ -99,7 +99,7 @@ router.delete(
 );
 
 router.get("/user/:userId(\\d+)", asyncHandler(async function (req, res) {
-    const userId = 1;
+    const userId = req.params.userId;
     const events = await Event.findAll({
         include: [{
             model: EventParticipant,
