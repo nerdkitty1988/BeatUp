@@ -1,0 +1,16 @@
+
+#singleEventPic {
+    width: 25%;
+    border-radius: 10px;
+}
+
+#singleEventCont {
+    border: 1px solid rgba(199, 195, 195, 0.438);
+    padding: 40px;
+    border-radius: 5px;
+}
+
+.singleEvent {
+    display: flex;
+    flex-direction: row;
+}

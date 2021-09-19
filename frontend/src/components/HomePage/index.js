@@ -28,7 +28,7 @@ function HomePage() {
                     <h1>Your next event</h1>
                     <NavLink id="seeAllButton" to={`/events/user/${sessionUser.id}`}>Events</NavLink>
                     <div className="nextEventCont">
-                        <NextEventPage sessionUser={sessionUser} />
+                        <NextEventPage  />
                     </div>
                 </div>
             </div>
