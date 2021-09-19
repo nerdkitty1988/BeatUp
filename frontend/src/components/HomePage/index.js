@@ -30,7 +30,7 @@ function HomePage() {
 							id="seeAllButton"
 							to={`/events/user/${sessionUser.id}`}
 						>
-							<button>All {sessionUser.userName}'s Events</button>
+							<button id="userEventsButton">All {sessionUser.username}'s Events</button>
 						</NavLink>
 					</div>
 					<div className="nextEventCont">

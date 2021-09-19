@@ -6,6 +6,14 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content:space-between;
     width: 100%;
+}
+
+#userEventsButton {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ed1c3fc9;
+    color: white;
 }
