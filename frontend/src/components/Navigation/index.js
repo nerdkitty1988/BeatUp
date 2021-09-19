@@ -1,12 +1,28 @@
 import "./Navigation.css";
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import * as sessionActions from "../../store/session";
+import { NavLink, Redirect } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import logo from "./beatupLogo.png";
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
+    const dispatch = useDispatch();
+	const [credential, setCredential] = useState("");
+	const [password, setPassword] = useState("");
+	const [errors, setErrors] = useState([]);
+
+    const handleDemoLogin = (e) => {
+		e.preventDefault();
+		setErrors([]);
+		return dispatch(sessionActions.login( {credential: "email@email.com", password: "password"} )).catch(
+			async (res) => {
+				const data = await res.json();
+				if (data && data.errors) setErrors(data.errors);
+			}
+		);
+	};
 
 	let sessionLinks;
 	if (sessionUser) {
@@ -21,6 +37,7 @@ function Navigation({ isLoaded }) {
 					<NavLink to="/login" className="loginSignup">
 						Log In
 					</NavLink>
+                    <button id="demoButton" type="button" onClick={handleDemoLogin}>Demo User</button>
 				</div>
 			</>
 		);

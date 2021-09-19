@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   EventComments.associate = function(models) {
     // associations can be defined here
+    EventComments.belongsTo(models.User, { foreignKey: "userId" });
+    EventComments.belongsTo(models.Event, { foreignKey: "eventId" });
   };
   return EventComments;
 };
