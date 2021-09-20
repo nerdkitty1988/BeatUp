@@ -14,7 +14,7 @@
 }
 
 #eventPhoto {
-    width: 50%;
+    width: 20%;
 }
 
 #editEventNav {
@@ -35,4 +35,13 @@
 
 .singleEventButtons:hover {
     background-color: #008394c9;
+}
+
+#wholeEvent {
+    display: flex;
+    flex-direction: row;
+}
+
+.editEventCont {
+    margin-top: 50px;
 }

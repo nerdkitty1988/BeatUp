@@ -1,5 +1,5 @@
 .signUpContainer {
-    display:block;
+    display:flex;
     flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -7,9 +7,11 @@
     border-radius: 4px;
     padding: 15px;
     width: 460px;
-    height: 625px;
+    height: 630px;
     margin-top: 150px;
     margin-bottom: 20px;
+    align-content: center;
+    justify-items: center;
 }
 
 .signupInput {
@@ -26,4 +28,14 @@
 .signupInput:hover {
     background-color: white;
     box-shadow: 0px 0px 5px 1px lightgray;
+}
+
+#signupButton {
+    background-color: #ed1c3fc9;
+	color: white;
+	font-weight: bolder;
+	border-radius: 3px;
+	width: 25%;
+	height: 5%;
+	padding: 7px;
 }

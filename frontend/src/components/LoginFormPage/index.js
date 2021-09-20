@@ -24,6 +24,20 @@ function LoginFormPage() {
 		);
 	};
 
+    const handleDemoLogin = (e) => {
+		e.preventDefault();
+		setErrors([]);
+		return dispatch(
+			sessionActions.login({
+				credential: "email@email.com",
+				password: "password",
+			})
+		).catch(async (res) => {
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		});
+	};
+
 	return (
 		<div className="signInBox">
 			<div className="loginTop">
@@ -66,10 +80,8 @@ function LoginFormPage() {
 							<button type="submit" className="loginButton">
 								Log In
 							</button>
-							<button type="button" className="cancelButton">
-								Cancel
-							</button>
-							<button type="button" className="demoButton">
+                            <NavLink to="/" className="cancelButton">Cancel</NavLink>
+							<button type="button" className="demoButton" onClick={handleDemoLogin}>
 								Demo User
 							</button>
 						</div>

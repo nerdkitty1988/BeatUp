@@ -44,8 +44,7 @@ const SingleEventPage = () => {
 			? event.eventPhotoUrl
 			: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommonlook.com%2Ftribe-related-events-placeholder%2F&psig=AOvVaw2KIYVmzCCF1e8p8Hyfj_Px&ust=1631898035505000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKjD04_8g_MCFQAAAAAdAAAAABAE"
 	);
-	const [eventOwnerId, setEventOwnerId] = useState();
-	const [groupId, setGroupId] = useState();
+
     const [rsvpStatus, setRsvpStatus] = useState();
 	const [errors, setErrors] = useState([]);
 	const [showEdit, setShowEdit] = useState(true);
@@ -200,6 +199,9 @@ const SingleEventPage = () => {
 							Delete Event
 						</button>
 					</div>
+                    <div>
+                        
+                    </div>
 					<img
 						id="eventPhoto"
 						src={
