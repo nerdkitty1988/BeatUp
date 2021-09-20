@@ -1,7 +1,37 @@
-.eventCont {
-    margin-top: 75px;
+.singleEventCont {
+    width: 100%;
 }
 
-#eventImg {
+.eventCont {
+    display: flex;
+    flex-direction: column;
+    margin-top: 75px;
+    border: 1px solid #0083942a;
+    justify-content: center;
+    align-items: center;
+    color: #008394c9;
+
+}
+
+#eventPhoto {
     width: 50%;
+}
+
+#editEventNav {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.singleEventButtons {
+    background-color: #0083942a;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    color: white;
+    transition: background-color;
+}
+
+.singleEventButtons:hover {
+    background-color: #008394c9;
 }
