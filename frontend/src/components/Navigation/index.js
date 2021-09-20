@@ -55,9 +55,9 @@ function Navigation({ isLoaded }) {
 	return (
 		<div id="navBar">
 			<div id="logo">
-                <a href='/'>
-				    <img className="logo-img" src={logo} alt="beatupLogo" />
-                </a>
+				<a href="/">
+					<img className="logo-img" src={logo} alt="beatupLogo" />
+				</a>
 			</div>
 			<div className="searchBar">
 				<form>
@@ -72,6 +72,9 @@ function Navigation({ isLoaded }) {
 				</form>
 			</div>
 			<div className="navLinks">{isLoaded && sessionLinks}</div>
+			<div class="footer">
+				<p>Jami Travers  2021 gitHub: nerdkitty1988</p>
+			</div>
 		</div>
 	);
 }

@@ -40,7 +40,7 @@ function HomePage() {
 
 	if (!sessionUser) {
         return (
-            <div id="homeContainer">
+            <div className="homeContainer">
 				<div>
 					<h1>Wanna rumble?</h1>
 					<NavLink className="newHomeNav" to="/signup">Sign up</NavLink>
