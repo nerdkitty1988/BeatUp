@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import "./SingleGroupPage.css";
 
 import { getGroups, updateMember } from "../../store/group";
-import { getLocations } from "../../store/location";
-import { createRsvp } from "../../store/rsvp";
 import { getGroupEvents } from "../../store/event";
 
 const SingleGroupPage = () => {
@@ -33,7 +31,7 @@ const SingleGroupPage = () => {
 			userId: sessionUser.id,
 			groupId,
 		};
-		let updatedMember = await dispatch(updateMember(payload));
+		return await dispatch(updateMember(payload));
 	};
 
 	let isMember = false;

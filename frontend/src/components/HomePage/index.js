@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { getUserEvents } from "../../store/event";
+import { getUserGroups } from "../../store/group";
 
 import { useSelector, useDispatch } from "react-redux";
 import "./HomePage.css";
 
 import NextEventPage from "../NextEventPage";
+import UserGroupsPage from "../UserEventPage";
 
 function HomePage() {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -20,9 +22,17 @@ function HomePage() {
 		return currentNext;
 	});
 
+    const userGroups = useSelector((state) => {
+        return Object.values(state.groupState.groupList);
+    });
+
+    useEffect(() => {
+        dispatch(getUserGroups(sessionUser))
+    }, [dispatch])
+
 	useEffect(() => {
-		dispatch(getUserEvents(sessionUser));
-	}, [dispatch]);
+		dispatch(getUserEvents(sessionUser))
+	}, [dispatch])
 
 	if (!sessionUser) {
 		return (
@@ -61,6 +71,9 @@ function HomePage() {
 				<div className="nextEventCont">
 					<NextEventPage nextEvent={nextEvent} />
 				</div>
+                <div className="userGroupsCont">
+                    <UserGroupsPage userGroups={userGroups} />
+                </div>
 			</div>
 		</div>
 	);
