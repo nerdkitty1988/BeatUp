@@ -235,6 +235,7 @@ const SingleEventPage = () => {
 						</select>
 					)}
 				</div>
+                <NavLink className="singleEventButtons" to="/events">Back to Events</NavLink>
 			</div>
 		</div>
 	);
