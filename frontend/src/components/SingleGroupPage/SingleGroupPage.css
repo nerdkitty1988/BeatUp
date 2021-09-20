@@ -1,5 +1,6 @@
 .wholeGroup {
-    margin-top: 50px;
+    margin-top: 80px;
+    align-items: center;
 }
 
 
@@ -27,9 +28,26 @@
 
 .eventBox {
     align-content: center;
-    width: 80%;
-    background-color: #008394c9;
+    width: 350px;
+    background-color: #008394b0;
     border: 1px solid #008394c9;
     border-radius: 5px;
-    box-shadow: 0px 0px 2px 1px #008394c9;
+    box-shadow: 0px 0px 3px 2px rgba(128, 128, 128, 0.226);
+    margin: 5px;
+}
+
+.groupDetails {
+    width: 75%;
+    margin-left: 50px;
+    box-shadow: 0px 0px 3px 2px rgba(128, 128, 128, 0.226);
+}
+
+.joinButton {
+    border:none;
+    cursor: pointer;
+    background-color: #ed1c3f9a;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 3px 2px #ed1c3f4f;
 }

@@ -56,12 +56,15 @@ const SingleGroupPage = () => {
 					{isMember ? (
 						"You are a member of this group"
 					) : (
-						<button onClick={(e) => handleAddToGroup}>
+						<button className="joinButton" onClick={(e) => handleAddToGroup}>
 							Join Group
 						</button>
 					)}
 				</h3>
 			</div>
+            <div id="calendar">
+
+            </div>
 			<div id="groupEvents">
 				{events.map((event) => (
 					<NavLink
@@ -79,6 +82,7 @@ const SingleGroupPage = () => {
 								{event.Location.locationCity},{" "}
 								{event.Location.locationState}
 							</h3>
+                            <h4>{new Date(event.eventDate).toDateString()}</h4>
 						</div>
 					</NavLink>
                 ))}

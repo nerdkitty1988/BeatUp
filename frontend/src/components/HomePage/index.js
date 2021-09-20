@@ -27,21 +27,25 @@ function HomePage() {
     });
 
     useEffect(() => {
-        dispatch(getUserGroups(sessionUser))
+        if(sessionUser){
+            dispatch(getUserGroups(sessionUser))
+        }
     }, [dispatch])
 
-	useEffect(() => {
-		dispatch(getUserEvents(sessionUser))
-	}, [dispatch])
+    useEffect(() => {
+        if(sessionUser) {
+            dispatch(getUserEvents(sessionUser))
+        }
+    }, [dispatch])
 
 	if (!sessionUser) {
-		return (
-			<div id="homeContainer">
+        return (
+            <div id="homeContainer">
 				<div>
 					<h1>Wanna rumble?</h1>
-					<NavLink to="/signup">Sign up</NavLink>
+					<NavLink className="newHomeNav" to="/signup">Sign up</NavLink>
 					<h2>Already a Fighter?</h2>
-					<NavLink to="/login">Sign in</NavLink>
+					<NavLink className="newHomeNav" to="/login">Sign in</NavLink>
 				</div>
 			</div>
 		);
@@ -71,14 +75,6 @@ function HomePage() {
 				<div className="nextEventCont">
 					<NextEventPage nextEvent={nextEvent} />
 				</div>
-                <div className="groupsTop">
-                    <h1>{sessionUser.username}'s Groups</h1>
-                    <NavLink to={"/groups"}>
-							<button className="userEventsButton">
-								All Groups
-							</button>
-						</NavLink>
-                </div>
                 <div className="userGroupsCont">
                     <UserGroupsPage userGroups={userGroups} />
                 </div>

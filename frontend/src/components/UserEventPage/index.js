@@ -25,21 +25,30 @@ const UserEventPage = () => {
 		dispatch(getUserEvents(sessionUser));
 	}, [dispatch]);
 
-
-	if (!events) return null;
+	if (events.length === 0)
+		return (
+			<div className="noEvent">
+				<h1>No current events</h1>
+				<NavLink to="/groups">
+					<button type="button" className="eventsButton">
+						Explore Events
+					</button>
+				</NavLink>
+			</div>
+		);
 
 	return (
 		<div className="fullpage">
 			<div className="eventListCont">
-				<div id="addEventNav">
+				<div className="addEventNav">
 					<NavLink className="eventGroupNav" to={`/events/add`}>
 						<button className="eventSelectButton">Events</button>
 					</NavLink>
-                    <NavLink class="eventGroupNav" to={`/events/add`}>
-                        <button className="eventGroupButton">Groups</button>
+					<NavLink class="eventGroupNav" to={`/events/add`}>
+						<button className="eventGroupButton">Groups</button>
 					</NavLink>
-                    <NavLink id="addEvent" to={`/events/add`}>
-                        <button id="addEventButton">Create Event</button>
+					<NavLink className="addEvent" to={`/events/add`}>
+						<button className="addEventButton">Create Event</button>
 					</NavLink>
 				</div>
 				<nav>
@@ -66,7 +75,9 @@ const UserEventPage = () => {
 										/>
 									</div>
 									<div className="eventInfo">
-										<p key={event.eventDate}>{readDate}@{event.eventTime}</p>
+										<p key={event.eventDate}>
+											{readDate}@{event.eventTime}
+										</p>
 										<h3>{event.eventName}</h3>
 										<div>
 											{locations.map((location) => {

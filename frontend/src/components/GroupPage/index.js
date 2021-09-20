@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./GroupPage.css";
+import AddGroupModal from "../AddGroupModal";
 
 import { getGroups } from "../../store/group";
 
@@ -33,11 +34,7 @@ const GroupPage = () => {
 							Groups
 						</button>
 					</NavLink>
-					<NavLink className="addGroup" to={`/groups/add`}>
-						<button type="button" className="addEventButton">
-							Create Group
-						</button>
-					</NavLink>
+					<AddGroupModal />
 				</div>
 				<nav>
 					{groups.map((group) => {
