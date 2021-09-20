@@ -4,8 +4,7 @@ import { NavLink } from "react-router-dom";
 import "./EventPage.css";
 
 import { getEvents } from "../../store/event";
-import { getLocations } from "../../store/location";
-import { getRsvps } from "../../store/rsvp";
+
 
 const EventPage = () => {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -14,78 +13,70 @@ const EventPage = () => {
 	const events = useSelector((state) => {
 		return Object.values(state.eventState.eventList);
 	});
-	const rsvps = useSelector((state) => {
-		return Object.values(state.rsvpState.rsvpList);
-	});
-	const locations = useSelector((state) => {
-		return Object.values(state.locationState.locationList);
-	});
-
-
-	useEffect(() => {
-		dispatch(getLocations());
-	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getEvents());
 	}, [dispatch]);
 
-	useEffect(() => {
-		dispatch(getRsvps());
-	}, [dispatch]);
-
 	if (!events) return null;
 
 	return (
-		<div className="eventListCont">
-            <div id="addEventNav">
-                <NavLink id="addEvent" to={`/events/add`}>Add New Event</NavLink>
-            </div>
-			<nav>
-				{events.map((event) => {
-                    const readDate = new Date(event.eventDate).toDateString();
-					return (
-						<NavLink
-							key={event.id}
-							to={`events/${event.id}`}
-						>
-							<div className="eventContainer">
-								<img
-									id="eventPhoto"
-									src={
-                                        event.eventPhotoUrl ? event.eventPhotoUrl : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommonlook.com%2Ftribe-related-events-placeholder%2F&psig=AOvVaw2KIYVmzCCF1e8p8Hyfj_Px&ust=1631898035505000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKjD04_8g_MCFQAAAAAdAAAAABAE"
-                                    }
-									alt="event"
-								/>
-								<div className="eventInfo">
-									<h2>{event.eventName}</h2>
-									<div>
-										{locations.map((location) => {
-											if (
-												event.eventLocationId === location.id
-											)
-												return (
-                                                    <p key={location.id}>{location.locationName}, {location.locationStreet}, {location.locationCity}, {location.locationState}, {location.locationZip}</p>
-
-                                                )
-										})}
-										<p key={event.eventDate}>{readDate}</p>
-										<p key={event.eventTime}>{event.eventTime}</p>
-										{rsvps.map((rsvp) => {
-											if (
-												rsvp.userId ===
-													sessionUser.id &&
-												rsvp.eventId === event.id
-											)
-												return <p key={rsvp.id}>{rsvp.rsvpStatus}</p>;
-										})}
+		<div className="fullpage">
+			<div className="eventListCont">
+				<div className="addEventNav">
+					<NavLink className="eventGroupNav" to={`/events`}>
+						<button type="button" className="eventSelectButton">Events</button>
+					</NavLink>
+					<NavLink className="eventGroupNav" to={`/groups`}>
+						<button type="button" className="eventGroupButton">Groups</button>
+					</NavLink>
+					<NavLink className="addEvent" to={`/events/add`}>
+						<button type="button" className="addEventButton">Create Event</button>
+					</NavLink>
+				</div>
+				<nav>
+					{events.map((event) => {
+						const readDate = new Date(
+							event.eventDate
+						).toDateString();
+                        const location = event.Location;
+                        const rsvps = event.Rsvps;
+                        const userRsvp = rsvps.filter((rsvp) => {
+                            return rsvp.userId === sessionUser.id && rsvp.eventId === event.id;
+                        })
+						return (
+							<NavLink
+								className="eventNavWhole"
+								key={event.id}
+								to={`events/${event.id}`}
+							>
+								<div className="eventContainer">
+									<div className="eventPhotoDiv">
+										<img
+											id="eventPhoto"
+											src={
+												event.eventPhotoUrl
+													? event.eventPhotoUrl
+													: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommonlook.com%2Ftribe-related-events-placeholder%2F&psig=AOvVaw2KIYVmzCCF1e8p8Hyfj_Px&ust=1631898035505000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKjD04_8g_MCFQAAAAAdAAAAABAE"
+											}
+											alt="event"
+										/>
+									</div>
+									<div className="eventInfo">
+										<p key={event.eventDate}>
+											{readDate}@{event.eventTime}
+										</p>
+										<h3>{event.eventName}</h3>
+                                        <p>{location.locationCity}, {location.locationState}</p>
+                                        <p>{userRsvp.length !== 0 ? userRsvp[0].rsvpStatus : "Not Attending"}</p>
+                                        <p>Participants: {event.EventParticipants.length}</p>
 									</div>
 								</div>
-							</div>
-						</NavLink>
-					);
-				})}
-			</nav>
+							</NavLink>
+						);
+					})}
+				</nav>
+			</div>
 		</div>
 	);
 };

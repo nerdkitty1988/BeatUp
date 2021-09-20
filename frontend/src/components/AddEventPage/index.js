@@ -50,7 +50,8 @@ const AddEventPage = () => {
 	return (
 		<div id="newEventCont">
 			<div id="formCont">
-				<form onSubmit={handleSubmit}>
+				<form id="newEventForm" onSubmit={handleSubmit}>
+                    <h1>Add New Event</h1>
 					<ul>
 						{errors.map((error, idx) => (
 							<li key={idx}>{error}</li>
@@ -78,7 +79,7 @@ const AddEventPage = () => {
 							))}
 						</select>
 					</label>
-					<NavLink to="/locations/add">New Location</NavLink>
+					{/* <NavLink to="/locations/add">New Location</NavLink> */}
 					<label>
 						Event Date
 						<input
@@ -105,8 +106,6 @@ const AddEventPage = () => {
 						<textarea
 							className="editEventInput"
 							value={eventDescription}
-							rows="10"
-							col="55"
 							onChange={(e) =>
 								setEventDescription(e.target.value)
 							}
@@ -134,7 +133,7 @@ const AddEventPage = () => {
                         ))}
                     </select>
                 </label> */}
-					<button type="submit">Submit</button>
+					<button id="newEventSubmit" type="submit">Submit</button>
 				</form>
 			</div>
 		</div>

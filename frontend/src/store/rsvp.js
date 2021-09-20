@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const LOAD = "rsvp/LOAD";
 const UPDATE = "rsvp/UPDATE";
 const ADD_ONE = "rsvp/ADD_ONE";
@@ -18,7 +20,7 @@ const update = (rsvpId) => ({
 });
 
 export const createRsvp = (newRsvp) => async (dispatch) => {
-	const res = await fetch("/api/rsvps", {
+	const res = await csrfFetch("/api/rsvps", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -33,7 +35,7 @@ export const createRsvp = (newRsvp) => async (dispatch) => {
 };
 
 export const updateRsvp = (newRsvp) => async (dispatch) => {
-	const res = await fetch("/api/rsvps", {
+	const res = await csrfFetch("/api/rsvps", {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -48,7 +50,7 @@ export const updateRsvp = (newRsvp) => async (dispatch) => {
 };
 
 export const getRsvps = () => async (dispatch) => {
-	const res = await fetch("/api/rsvps");
+	const res = await csrfFetch("/api/rsvps");
 
 	if (res.ok) {
 		const list = await res.json();

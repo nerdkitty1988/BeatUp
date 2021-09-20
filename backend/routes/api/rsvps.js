@@ -12,4 +12,13 @@ router.get(
 	})
 );
 
+router.post(
+	"/",
+	asyncHandler(async (req, res) => {
+		const { userId, eventId, rsvpStatus } = req.body;
+        const details = { userId, eventId, rsvpStatus };
+        const rsvp = await Rsvp.create(details);
+	})
+);
+
 module.exports = router;

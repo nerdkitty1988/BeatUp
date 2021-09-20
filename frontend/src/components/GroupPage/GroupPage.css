@@ -1,4 +1,3 @@
-
 .eventListCont {
     display: flex;
     margin-top: 175px;
@@ -42,11 +41,12 @@
     margin-bottom: 3px;
 }
 
-.eventNavWhole p {
+.groupNavWhole {
     color: rgba(0, 0, 0, 0.527);
     font-weight: 500;
     margin-top: 3px;
     margin-bottom: 3px;
+    text-decoration: none;
 }
 
 .eventInfo {
@@ -60,7 +60,7 @@
 
 }
 
-.eventGroupButton {
+.groupSelectButton {
     font-size: 25px;
     font-weight: 700;
     background-color: white;
@@ -70,7 +70,7 @@
     color: grey;
 
 }
-.eventSelectButton {
+.groupEventButton {
     font-size: 25px;
     font-weight: 700;
     background-color: white;
@@ -81,11 +81,11 @@
     color: #008294;
 }
 
-.eventSelectButton:hover, .eventGroupButton:hover {
+.groupSelectButton:hover, .groupEventButton:hover {
     cursor: pointer;
 }
 
-.addEventButton {
+.addGroupButton {
     background-color: white;
     border-color: #00839498;
     color: #008394e1;
@@ -95,9 +95,17 @@
     font-weight: 700;
     margin-bottom: 20px;
     margin-left: 65px;
-    cursor: pointer;
 }
 
 .addEventNav {
     margin-bottom: 30px;
+}
+
+.groupContainer {
+    display: flex;
+    border-bottom: 1px solid grey;
+    justify-content: space-between;
+    align-items: center;
+    color: #008294;
+    text-decoration: none;
 }

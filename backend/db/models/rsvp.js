@@ -6,12 +6,10 @@ module.exports = (sequelize, DataTypes) => {
 			userId: {
 				allowNull: false,
 				type: DataTypes.INTEGER,
-				references: { model: "Users" },
 			},
 			eventId: {
 				allowNull: false,
 				type: DataTypes.INTEGER,
-				references: { model: "Events" },
 			},
 			rsvpStatus: {
 				allowNull: false,
@@ -23,6 +21,8 @@ module.exports = (sequelize, DataTypes) => {
 	);
 	Rsvp.associate = function (models) {
 		// associations can be defined here
+        Rsvp.belongsTo(models.User, { foreignKey: "userId" });
+		Rsvp.belongsTo(models.Event, { foreignKey: "eventId" });
 	};
 	return Rsvp;
 };
