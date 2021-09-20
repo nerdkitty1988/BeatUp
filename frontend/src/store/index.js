@@ -5,12 +5,14 @@ import sessionReducer from "./session";
 import eventReducer from "./event";
 import rsvpReducer from "./rsvp";
 import locationReducer from "./location";
+import groupReducer from "./group";
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     eventState: eventReducer,
     rsvpState: rsvpReducer,
     locationState: locationReducer,
+    groupState: groupReducer,
 });
 
 let enhancer;

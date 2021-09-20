@@ -4,8 +4,7 @@ import { NavLink } from "react-router-dom";
 import "./EventPage.css";
 
 import { getEvents } from "../../store/event";
-import { getLocations } from "../../store/location";
-import { getRsvps } from "../../store/rsvp";
+
 
 const EventPage = () => {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -14,8 +13,6 @@ const EventPage = () => {
 	const events = useSelector((state) => {
 		return Object.values(state.eventState.eventList);
 	});
-
-    console.log(events);
 
 	useEffect(() => {
 		dispatch(getEvents());
@@ -26,15 +23,15 @@ const EventPage = () => {
 	return (
 		<div className="fullpage">
 			<div className="eventListCont">
-				<div id="addEventNav">
+				<div className="addEventNav">
 					<NavLink className="eventGroupNav" to={`/events`}>
 						<button type="button" className="eventSelectButton">Events</button>
 					</NavLink>
 					<NavLink className="eventGroupNav" to={`/groups`}>
 						<button type="button" className="eventGroupButton">Groups</button>
 					</NavLink>
-					<NavLink id="addEvent" to={`/events/add`}>
-						<button type="button" id="addEventButton">Create Event</button>
+					<NavLink className="addEvent" to={`/events/add`}>
+						<button type="button" className="addEventButton">Create Event</button>
 					</NavLink>
 				</div>
 				<nav>

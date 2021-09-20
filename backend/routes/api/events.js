@@ -1,5 +1,3 @@
-const { group } = require("console");
-const { RSA_SSLV23_PADDING } = require("constants");
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { Event, EventParticipant, User, Rsvp, Group, Location, EventComment } = require("../../db/models");

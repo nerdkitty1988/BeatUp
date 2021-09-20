@@ -28,7 +28,6 @@ export const createEvent = (newEvent) => async (dispatch) => {
 		body: JSON.stringify(newEvent),
 	});
 	const event = await res.json();
-    console.log(event)
 	if (res.ok) {
 		await dispatch(addOneEvent(event));
 	}
@@ -105,7 +104,6 @@ const eventReducer = (state = initialState, action) => {
 				...state.eventList,
 				[action.event.id]: action.event,
 			};
-            console.log(newEventList, "New List")
 
 			return {
 				...state,

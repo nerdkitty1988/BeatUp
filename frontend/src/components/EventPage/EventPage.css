@@ -54,7 +54,7 @@
     margin-top: -45px;
 }
 
-#editEventNav {
+.editEventNav {
     justify-content: left;
     width: 100%;
 
@@ -85,7 +85,7 @@
     cursor: pointer;
 }
 
-#addEventButton {
+.addEventButton {
     background-color: white;
     border-color: #00839498;
     color: #008394e1;
@@ -95,6 +95,7 @@
     font-weight: 700;
     margin-bottom: 20px;
     margin-left: 65px;
+    cursor: pointer;
 }
 
 .addEventNav {
