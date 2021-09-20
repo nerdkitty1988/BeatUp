@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import "./HomePage.css";
 
 import NextEventPage from "../NextEventPage";
-import UserGroupsPage from "../UserEventPage";
+import UserGroupsPage from "../UserGroupsPage";
 
 function HomePage() {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -71,6 +71,14 @@ function HomePage() {
 				<div className="nextEventCont">
 					<NextEventPage nextEvent={nextEvent} />
 				</div>
+                <div className="groupsTop">
+                    <h1>{sessionUser.username}'s Groups</h1>
+                    <NavLink to={"/groups"}>
+							<button className="userEventsButton">
+								All Groups
+							</button>
+						</NavLink>
+                </div>
                 <div className="userGroupsCont">
                     <UserGroupsPage userGroups={userGroups} />
                 </div>

@@ -1,0 +1,28 @@
+.groupCont {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
+}
+
+.groupDetails {
+    border: 1px solid rgba(128, 128, 128, 0.178);
+    border-radius: 5px;
+    margin: 7px;
+    padding: 10px;
+    text-decoration: none;
+    color: #008394c9;
+    width: 20%;
+
+}
+
+.groupsTop {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+}
+
+.userEventsButton {
+    margin-left: 35px;
+}
