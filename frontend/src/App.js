@@ -11,6 +11,7 @@ import SingleEventPage from "./components/SingleEventPage";
 import AddEventPage from "./components/AddEventPage";
 import UserEventPage from "./components/UserEventPage";
 import GroupPage from "./components/GroupPage";
+import SingleGroupPage from "./components/SingleGroupPage"
 
 function App() {
 	const dispatch = useDispatch();
@@ -45,8 +46,11 @@ function App() {
                     <Route path="/events/user/:userId">
                         <UserEventPage />
                     </Route>
-                    <Route path="/groups">
+                    <Route exact path="/groups">
                         <GroupPage />
+                    </Route>
+                    <Route path="/groups/:groupId">
+                        <SingleGroupPage />
                     </Route>
 				</Switch>
 			)}

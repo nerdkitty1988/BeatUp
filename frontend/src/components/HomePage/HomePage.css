@@ -18,7 +18,9 @@
     color: white;
     margin: 2px;
     box-shadow: 0px 0px 2px 1px rgba(128, 128, 128, 0.678);
+    cursor: pointer;
 }
+
 
 .nextEventCont {
     width: 100%;

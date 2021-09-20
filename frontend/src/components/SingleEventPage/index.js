@@ -128,9 +128,9 @@ const SingleEventPage = () => {
 							value={eventLocationId}
 							onChange={(e) => setEventLocationId(e.target.value)}
 						>
-							{locations.map((location, idx) => (
-								<option key={location.id} value={location.id}>
-									{location.locationName}
+							{locations.map((thislocation, idx) => (
+								<option key={thislocation.id} value={thislocation.id}>
+									{thislocation.locationName}
 								</option>
 							))}
 						</select>
