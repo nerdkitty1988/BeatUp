@@ -1,7 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
-import { getUserEvents } from "../../store/event";
-import { getLocations } from "../../store/location";
-import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./NextEventPage.css";
 
@@ -16,8 +12,6 @@ const NextEventPage = ({nextEvent}) => {
 	const readDate = nextEvent
 		? new Date(nextEvent.eventDate).toDateString()
 		: new Date();
-	console.log(nextEvent);
-    console.log(location)
 	if (!nextEvent || !location)
 		return (
 			<div className="singleNoEventCont">
@@ -58,7 +52,7 @@ const NextEventPage = ({nextEvent}) => {
 						<p id="sEventDescription">
 							{nextEvent.eventDescription}
 						</p>
-						<p>
+						<p id="sEventLocation">
 							{location.locationCity}, {location.locationState}
 						</p>
 					</div>

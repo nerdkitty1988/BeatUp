@@ -148,3 +148,14 @@ body {
 #emailDrop {
     border-bottom: 1px solid rgba(128, 128, 128, 0.384);
 }
+
+#demoButton {
+    padding: 5px;
+    color: white;
+    background-color: #ed1c3fc9;
+    font-size: 15px;
+    margin-right: 20px;
+    border: none;
+    border-radius: 5px;
+}
+

@@ -83,6 +83,14 @@ export const getUserEvents = (user) => async(dispatch) => {
         dispatch(load(list));
     }
 }
+export const getGroupEvents = (groupId) => async(dispatch) => {
+    const res = await csrfFetch(`/api/events/group/${groupId}`);
+
+    if (res.ok) {
+        const list = await res.json();
+        dispatch(load(list));
+    }
+}
 
 const initialState = {
 	eventList: {},

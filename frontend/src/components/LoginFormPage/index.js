@@ -28,7 +28,12 @@ function LoginFormPage() {
 		<div className="signInBox">
 			<div className="loginTop">
 				<h1 className="loginHead">Log in</h1>
-				<p>Not registered with us yet? <NavLink to='/signup' className='authLinks'>Sign Up</NavLink></p>
+				<p>
+					Not registered with us yet?{" "}
+					<NavLink to="/signup" className="authLinks">
+						Sign Up
+					</NavLink>
+				</p>
 			</div>
 			<div className="signinForm">
 				<form onSubmit={handleSubmit}>
@@ -38,32 +43,36 @@ function LoginFormPage() {
 						))}
 					</ul>
 					<div className="signInFields">
-						<label className="login-label">
-							Username or Email
-							<input
-								className="signInInput"
-								type="text"
-								value={credential}
-								onChange={(e) => setCredential(e.target.value)}
-								required
-							/>
-						</label>
+						<label className="login-label" htmlFor="credential" />
+						Username or Email
+						<input
+							className="signInInput"
+							type="text"
+							value={credential}
+							onChange={(e) => setCredential(e.target.value)}
+							required
+						/>
 						<label className="login-label" htmlFor="password" />
-							Password
-							<input
-								className="signInInput"
-                                name="password"
-								type="password"
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								required
-							/>
-							<NavLink to="/forgotPassword" className='authLinks'>
-								Forgot your password?
-							</NavLink>
-						<button type="submit" className="loginButton">
-							Log In
-						</button>
+						Password
+						<input
+							className="signInInput"
+							name="password"
+							type="password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							required
+						/>
+						<div>
+							<button type="submit" className="loginButton">
+								Log In
+							</button>
+							<button type="button" className="cancelButton">
+								Cancel
+							</button>
+							<button type="button" className="demoButton">
+								Demo User
+							</button>
+						</div>
 					</div>
 				</form>
 			</div>

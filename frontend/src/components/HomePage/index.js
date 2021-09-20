@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { getUserEvents } from "../../store/event";
+import { getUserGroups } from "../../store/group";
 
 import { useSelector, useDispatch } from "react-redux";
 import "./HomePage.css";
 
 import NextEventPage from "../NextEventPage";
+import UserGroupsPage from "../UserGroupsPage";
 
 function HomePage() {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -20,18 +22,30 @@ function HomePage() {
 		return currentNext;
 	});
 
-	useEffect(() => {
-		dispatch(getUserEvents(sessionUser));
-	}, [dispatch]);
+    const userGroups = useSelector((state) => {
+        return Object.values(state.groupState.groupList);
+    });
+
+    useEffect(() => {
+        if(sessionUser){
+            dispatch(getUserGroups(sessionUser))
+        }
+    }, [dispatch])
+
+    useEffect(() => {
+        if(sessionUser) {
+            dispatch(getUserEvents(sessionUser))
+        }
+    }, [dispatch])
 
 	if (!sessionUser) {
-		return (
-			<div id="homeContainer">
+        return (
+            <div id="homeContainer">
 				<div>
 					<h1>Wanna rumble?</h1>
-					<NavLink to="/signup">Sign up</NavLink>
+					<NavLink className="newHomeNav" to="/signup">Sign up</NavLink>
 					<h2>Already a Fighter?</h2>
-					<NavLink to="/login">Sign in</NavLink>
+					<NavLink className="newHomeNav" to="/login">Sign in</NavLink>
 				</div>
 			</div>
 		);
@@ -61,6 +75,9 @@ function HomePage() {
 				<div className="nextEventCont">
 					<NextEventPage nextEvent={nextEvent} />
 				</div>
+                <div className="userGroupsCont">
+                    <UserGroupsPage userGroups={userGroups} />
+                </div>
 			</div>
 		</div>
 	);

@@ -52,6 +52,20 @@ export const getUserGroups = (user) => async (dispatch) => {
 	}
 };
 
+export const updateMember = (groupMember) => async (dispatch) => {
+    const res = await csrfFetch(`/api/groups/addMember`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(groupMember),
+	});
+    if (res.ok) {
+        const list = await res.json();
+        dispatch(load(list));
+    }
+}
+
 const initialState = {
 	groupList: {},
 };

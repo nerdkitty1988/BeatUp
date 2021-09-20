@@ -148,5 +148,26 @@ router.get(
 		return res.json(events);
 	})
 );
+router.get(
+	"/group/:groupId(\\d+)",
+	asyncHandler(async function (req, res) {
+		const groupId = req.params.groupId;
+		const events = await Event.findAll({
+            where: {
+                groupId
+            },
+			include: [
+                {
+                    model: Location,
+                },
+                {
+                    model: Rsvp,
+                },
+
+			],
+		});
+		return res.json(events);
+	})
+);
 
 module.exports = router;

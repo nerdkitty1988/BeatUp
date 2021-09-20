@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, NavLink, useHistory } from "react-router-dom";
-import * as sessionActions from "../../store/session";
+import { NavLink, useHistory } from "react-router-dom";
 import { createEvent } from "../../store/event";
 import { getLocations } from "../../store/location";
+import { getUserGroups } from "../../store/group";
 import "./AddEventPage.css";
 
 const AddEventPage = () => {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
-    let history = useHistory();
+	let history = useHistory();
 	const [eventName, setEventName] = useState("");
 	const [eventLocationId, setEventLocationId] = useState("");
 	const [eventDate, setEventDate] = useState("");
@@ -26,8 +26,18 @@ const AddEventPage = () => {
 		return Object.values(state.locationState.locationList);
 	});
 
+	const groups = useSelector((state) => {
+		return Object.values(state.groupState.groupList);
+	});
+
+	console.log(groups);
+
 	useEffect(() => {
 		dispatch(getLocations());
+	}, [dispatch]);
+
+	useEffect(() => {
+		dispatch(getUserGroups(sessionUser));
 	}, [dispatch]);
 
 	const handleSubmit = async (e) => {
@@ -40,18 +50,17 @@ const AddEventPage = () => {
 			eventTime,
 			eventDescription,
 			eventPhotoUrl,
-            eventOwnerId
+			eventOwnerId,
 		};
 		dispatch(createEvent(payload));
-        history.push(`/events`)
-
+		history.push(`/events`);
 	};
 
 	return (
 		<div id="newEventCont">
 			<div id="formCont">
 				<form id="newEventForm" onSubmit={handleSubmit}>
-                    <h1>Add New Event</h1>
+					<h1>Add New Event</h1>
 					<ul>
 						{errors.map((error, idx) => (
 							<li key={idx}>{error}</li>
@@ -69,10 +78,10 @@ const AddEventPage = () => {
 					<label>
 						Location
 						<select
-							id="locations"
+							className="locationsGroups"
 							onChange={(e) => setEventLocationId(e.target.value)}
 						>
-							{locations.map((location, idx) => (
+							{locations.map((location) => (
 								<option key={location.id} value={location.id}>
 									{location.locationName}
 								</option>
@@ -120,20 +129,32 @@ const AddEventPage = () => {
 							onChange={(e) => setEventPhotoUrl(e.target.value)}
 						/>
 					</label>
-					{/* if {groups}
-                <label>
-                    Group
-                    <select
-                        id="group"
-                        placeholder="Your Groups"
-                        onChange={(e) => setgroupId(e.target.value.id)}
-                    >
-                        {groups.map((group, idx) => (
-                            <option value={group[idx]}>{group.name}</option>
-                        ))}
-                    </select>
-                </label> */}
-					<button id="newEventSubmit" type="submit">Submit</button>
+					{groups ? (
+						<label>
+							Group
+							<select
+								className="locationsGroups"
+								onChange={(e) =>
+									setGroupId(e.target.value)
+								}
+							>
+								{groups.map((group) => (
+									<option
+										key={group.id}
+										value={group.id}
+									>
+										{group.groupName}
+									</option>
+								))}
+							</select>
+						</label>
+					) : (
+						<h3>No Groups</h3>
+					)}
+					<button id="newEventSubmit" type="submit">
+						Submit
+					</button>
+                    <NavLink className="cancel" to="/events">Cancel</NavLink>
 				</form>
 			</div>
 		</div>

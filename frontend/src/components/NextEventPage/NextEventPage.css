@@ -2,6 +2,7 @@
 .singleEventPic {
     width: 100%;
     border-radius: 10px;
+    box-shadow: 0px 0px 3px 2px #00839444;
 }
 
 .singleEventCont {
@@ -65,4 +66,29 @@
 
 .notAttending {
     font-weight: 400;
+}
+
+.singleEventInfoCont {
+    padding-left: 10px;
+}
+
+#sEventName {
+    font-size: 20px;
+    font-weight: 700;
+    color: #008294;
+}
+
+#sEventDate {
+    font-variant: small-caps;
+    font-size: 18px;
+    font-weight: 600;
+    color: #0083946b;
+}
+
+#sEventDescription {
+    color:#008294;
+}
+
+#sEventLocation {
+    color:#008294;
 }

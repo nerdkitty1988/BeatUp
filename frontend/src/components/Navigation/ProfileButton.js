@@ -42,7 +42,6 @@ function ProfileButton({ user }) {
 						    <li>{user.username}</li>
 						    <li id="emailDrop" >{user.email}</li>
                             <li><NavLink className="dropNavLink" to={`/events/user/${user.id}`}>{user.username}'s Events</NavLink></li>
-                            <li><NavLink className="dropNavLink" to={`/groups/user/${user.id}`}>{user.username}'s Groups</NavLink></li>
 						    <li onClick={logout} className="dropDownLink">Logout</li>
 					    </ul>
                     </div>
