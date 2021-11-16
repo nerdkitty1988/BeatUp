@@ -58,7 +58,6 @@ export const deleteEvent = (event) => async (dispatch) => {
         body: JSON.stringify(event),
     });
     const eventId = await res.json();
-    console.log(eventId)
     if (res.ok) {
         await dispatch(remove(eventId));
     }

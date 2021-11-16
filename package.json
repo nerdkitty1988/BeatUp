@@ -5,7 +5,9 @@
   "main": "index.js",
   "dependencies": {
     "heroku": "^7.59.0",
-    "node": "^16.9.1"
+    "node": "^16.9.1",
+    "sequelize": "^6.9.0",
+    "sequelize-cli": "^6.3.0"
   },
   "devDependencies": {},
   "scripts": {
